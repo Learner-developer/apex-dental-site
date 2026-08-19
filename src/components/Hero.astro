@@ -1,0 +1,45 @@
+---
+import { Image } from 'astro:assets';
+import heroPortrait from '@visuals/03_doctor_and_team/dr-jyothi-sajjan-treating-patient-portrait.jpg';
+import { phoneDisplay, telUrl, whatsappUrl } from '../data/site';
+---
+
+<section class="section-shell py-12 md:py-20">
+  <div class="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
+    <div class="reveal-on-scroll">
+      <p class="mb-3 inline-flex items-center gap-2 rounded-full bg-brand/10 px-4 py-1.5 text-sm font-semibold text-brand-dark">
+        ★ 4.97 · 482 Google Reviews
+      </p>
+      <h1 class="text-4xl font-bold tracking-tight text-stone-900 sm:text-5xl lg:text-6xl">
+        Where Quality Meets Affordability
+      </h1>
+      <p class="mt-5 max-w-xl text-lg leading-relaxed text-stone-600">
+        Bengaluru's 4.97★ dental & orthodontic clinic — 482 patient reviews, led by an
+        MDS-qualified orthodontist.
+      </p>
+      <div class="mt-8 flex flex-wrap gap-4">
+        <a
+          href={whatsappUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-cta btn-cta-primary"
+        >
+          Book on WhatsApp
+        </a>
+        <a href={telUrl} class="btn-outline">Call {phoneDisplay}</a>
+      </div>
+    </div>
+
+    <div class="reveal-on-scroll overflow-hidden rounded-3xl shadow-[var(--shadow-lift)]">
+      <Image
+        src={heroPortrait}
+        alt="Dr. Jyothi Sajjan treating a patient at Apex Dental clinic"
+        class="aspect-[4/5] h-full w-full object-cover object-top"
+        widths={[480, 640, 800]}
+        sizes="(max-width: 1024px) 100vw, 50vw"
+        loading="eager"
+        fetchpriority="high"
+      />
+    </div>
+  </div>
+</section>

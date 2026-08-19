@@ -1,0 +1,18 @@
+---
+import { trustStats } from '../data/content';
+---
+
+<section class="border-y border-stone-200/80 bg-white py-10 md:py-12" aria-label="Clinic statistics">
+  <div class="section-shell">
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        trustStats.map((stat) => (
+          <div class="reveal-on-scroll card-surface card-hover p-6 text-center">
+            <p class="text-3xl font-bold text-brand-dark">{stat.value}</p>
+            <p class="mt-2 text-sm leading-relaxed text-stone-600">{stat.label}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

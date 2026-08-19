@@ -1,0 +1,98 @@
+---
+import { testimonials } from '../data/testimonials';
+---
+
+<section id="reviews" class="bg-white py-16 md:py-24">
+  <div class="section-shell">
+    <div class="reveal-on-scroll max-w-3xl">
+      <h2 class="section-title">Patient Reviews</h2>
+      <p class="section-lead">
+        4.97★ from 482 Google reviews — short highlights from verified patients.
+      </p>
+    </div>
+
+    <div
+      class="relative mt-10"
+      x-data={`{
+        index: 0,
+        total: ${testimonials.length},
+        next() { this.index = (this.index + 1) % this.total; },
+        prev() { this.index = (this.index - 1 + this.total) % this.total; }
+      }`}
+    >
+      <div class="overflow-hidden">
+        <div
+          class="flex transition-transform duration-300 ease-out"
+          x-bind:style="`transform: translateX(-${index * 100}%)`"
+        >
+          {
+            testimonials.map((item) => (
+              <article class="w-full shrink-0 px-1">
+                <div class="card-surface mx-auto max-w-2xl p-6 md:p-8">
+                  <div class="flex items-start gap-4">
+                    <img
+                      src={item.avatarUrl}
+                      alt={`${item.author} avatar`}
+                      class="h-14 w-14 rounded-full"
+                      width="56"
+                      height="56"
+                      loading="lazy"
+                    />
+                    <div>
+                      <h3 class="font-bold text-stone-900">{item.author}</h3>
+                      <p class="mt-1 text-sm text-amber-600" aria-label={`${item.rating} out of 5 stars`}>
+                        {'★'.repeat(item.rating)}
+                        <span class="sr-only">{item.rating} stars</span>
+                      </p>
+                      <div class="mt-1 flex flex-wrap gap-2">
+                        {item.isLocalGuide && (
+                          <span class="rounded-full bg-brand/10 px-2 py-0.5 text-xs font-medium text-brand-dark">
+                            Google Local Guide
+                          </span>
+                        )}
+                        {item.reviewCount && (
+                          <span class="rounded-full bg-stone-100 px-2 py-0.5 text-xs font-medium text-stone-600">
+                            {item.reviewCount} reviews
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                  <blockquote class="mt-5 text-lg italic text-stone-700">"{item.quote}"</blockquote>
+                  <a
+                    href={item.googleReviewUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="mt-5 inline-flex text-sm font-semibold text-brand-dark hover:underline"
+                  >
+                    Read full review on Google →
+                  </a>
+                </div>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+
+      <div class="mt-6 flex items-center justify-center gap-4">
+        <button
+          type="button"
+          class="btn-outline px-4 py-2"
+          x-on:click="prev()"
+          aria-label="Previous review"
+        >
+          ← Prev
+        </button>
+        <span class="text-sm text-stone-600" x-text="`${index + 1} / ${total}`"></span>
+        <button
+          type="button"
+          class="btn-outline px-4 py-2"
+          x-on:click="next()"
+          aria-label="Next review"
+        >
+          Next →
+        </button>
+      </div>
+    </div>
+  </div>
+</section>

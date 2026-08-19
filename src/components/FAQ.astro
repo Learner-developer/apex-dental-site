@@ -1,0 +1,52 @@
+---
+import { faqItems } from '../data/content';
+---
+
+<section id="faq" class="py-16 md:py-24">
+  <div class="section-shell max-w-3xl">
+    <div class="reveal-on-scroll">
+      <h2 class="section-title">Frequently Asked Questions</h2>
+      <p class="section-lead">Common questions about braces, root canals, pricing, and sterilization.</p>
+    </div>
+
+    <div class="mt-8 space-y-3" x-data="{ open: 0 }">
+      {
+        faqItems.map((item, index) => (
+          <div class="card-surface overflow-hidden">
+            <button
+              type="button"
+              class="flex w-full items-center justify-between gap-4 px-5 py-4 text-left"
+              x-on:click={`open = open === ${index} ? -1 : ${index}`}
+              x-bind:aria-expanded={`open === ${index}`}
+            >
+              <span class="font-semibold text-stone-900">{item.question}</span>
+              <svg
+                class="h-5 w-5 shrink-0 text-stone-500 transition"
+                x-bind:class={`open === ${index} ? 'rotate-180' : ''`}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div
+              class="border-t border-stone-100 px-5 pb-4 pt-2 text-stone-600"
+              x-show={`open === ${index}`}
+              x-cloak
+            >
+              {item.answer}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  [x-cloak] {
+    display: none !important;
+  }
+</style>

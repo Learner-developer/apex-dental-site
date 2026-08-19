@@ -1,0 +1,50 @@
+---
+import { Image } from 'astro:assets';
+import { clinicTourItems } from '../data/gallery';
+import { altFromFilename } from '../utils/altText';
+
+import img1 from '@visuals/02_clinic_and_facilities/interior_and_equipment/treatment-operatory-green-chair-setup.jpg';
+import img2 from '@visuals/02_clinic_and_facilities/interior_and_equipment/treatment-operatory-blue-chair-side.jpg';
+import img3 from '@visuals/02_clinic_and_facilities/interior_and_equipment/operatory-chair-with-digital-opg-xray-display.jpg';
+import img4 from '@visuals/02_clinic_and_facilities/interior_and_equipment/digital-panoramic-opg-xray-monitor.jpg';
+import img5 from '@visuals/02_clinic_and_facilities/interior_and_equipment/nsk-endo-mate-dt-rotary-endodontic-motor.jpg';
+import img6 from '@visuals/02_clinic_and_facilities/interior_and_equipment/sterilization-room-autoclave-and-storage.jpg';
+import img7 from '@visuals/02_clinic_and_facilities/exterior/clinic-entrance-reception-glass-door.jpg';
+import img8 from '@visuals/02_clinic_and_facilities/exterior/clinic-outdoor-hanging-signboard.jpg';
+import img9 from '@visuals/02_clinic_and_facilities/interior_and_equipment/clinic-interior-operatory-and-sterilization-room.jpg';
+import img10 from '@visuals/02_clinic_and_facilities/interior_and_equipment/operatory-and-doctor-consultation-desk.jpg';
+import img11 from '@visuals/02_clinic_and_facilities/interior_and_equipment/dental-chair-unit-side-view.jpg';
+import img12 from '@visuals/02_clinic_and_facilities/interior_and_equipment/dental-chair-led-examination-light-detail.jpg';
+
+const tourImages = [img1, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11, img12];
+---
+
+<section id="gallery" class="py-16 md:py-24">
+  <div class="section-shell">
+    <div class="reveal-on-scroll max-w-3xl">
+      <h2 class="section-title">Clinic & Technology Tour</h2>
+      <p class="section-lead">
+        Modern operatories, on-site digital imaging, rotary endodontics, and a dedicated sterilization
+        bay — see the clinic before you visit.
+      </p>
+    </div>
+
+    <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        clinicTourItems.map((item, index) => (
+          <figure class="reveal-on-scroll card-surface card-hover overflow-hidden">
+            <Image
+              src={tourImages[index]}
+              alt={altFromFilename(item.filename)}
+              class="aspect-[4/3] w-full object-cover"
+              widths={[400, 600, 800]}
+              sizes="(max-width: 768px) 100vw, 33vw"
+              loading="lazy"
+            />
+            <figcaption class="p-4 text-sm leading-relaxed text-stone-600">{item.caption}</figcaption>
+          </figure>
+        ))
+      }
+    </div>
+  </div>
+</section>

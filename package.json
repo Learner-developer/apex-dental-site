@@ -1,0 +1,27 @@
+{
+  "name": "apex-dental-site",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "alpinejs": "^3.16.2",
+    "astro": "^7.2.3",
+    "tailwindcss": "^4.3.3"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "sharp",
+      "esbuild"
+    ]
+  },
+  "devDependencies": {
+    "@types/alpinejs": "^3.13.11",
+    "typescript": "^7.0.2"
+  }
+}

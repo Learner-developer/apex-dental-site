@@ -1,0 +1,110 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --color-brand: #0d9488;
+  --color-brand-dark: #0f766e;
+  --color-cream: #fafaf9;
+  --color-cta: #f59e0b;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --radius-card: 1rem;
+  --shadow-soft: 0 4px 24px rgb(15 23 42 / 0.08);
+  --shadow-lift: 0 12px 32px rgb(15 23 42 / 0.12);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-cream font-sans text-stone-800 antialiased;
+  }
+
+  ::selection {
+    @apply bg-brand/20 text-stone-900;
+  }
+}
+
+@layer components {
+  .section-shell {
+    @apply mx-auto max-w-6xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-title {
+    @apply text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl;
+  }
+
+  .section-lead {
+    @apply mt-3 max-w-2xl text-base leading-relaxed text-stone-600 sm:text-lg;
+  }
+
+  .card-surface {
+    @apply rounded-2xl bg-white shadow-[var(--shadow-soft)] transition duration-200 ease-out;
+  }
+
+  .card-hover {
+    @apply hover:-translate-y-1 hover:shadow-[var(--shadow-lift)];
+  }
+
+  .btn-cta {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-cta px-5 py-3 text-sm font-semibold text-stone-900 shadow-sm transition duration-200 ease-out hover:-translate-y-0.5 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand;
+  }
+
+  .btn-brand {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-brand-dark px-5 py-3 text-sm font-semibold text-white shadow-sm transition duration-200 ease-out hover:-translate-y-0.5 hover:bg-brand hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-stone-300 bg-white px-5 py-3 text-sm font-semibold text-stone-800 transition duration-200 ease-out hover:-translate-y-0.5 hover:border-brand hover:text-brand-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .reveal-on-scroll {
+    animation: reveal-fade-up linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 30%;
+  }
+
+  .btn-cta-primary {
+    animation: cta-pulse 3s ease-in-out infinite;
+  }
+}
+
+@keyframes reveal-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes cta-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgb(245 158 11 / 0.35);
+  }
+
+  50% {
+    box-shadow: 0 0 0 10px rgb(245 158 11 / 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal-on-scroll {
+    animation: none;
+  }
+
+  .btn-cta-primary {
+    animation: none;
+  }
+}
