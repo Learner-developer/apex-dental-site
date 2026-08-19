@@ -9,20 +9,18 @@
     "preview": "astro preview"
   },
   "dependencies": {
-    "@tailwindcss/vite": "^4.3.3",
-    "alpinejs": "^3.16.2",
-    "astro": "^7.2.3",
-    "tailwindcss": "^4.3.3"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "sharp",
-      "esbuild"
-    ]
+    "@tailwindcss/vite": "^4.1.11",
+    "alpinejs": "^3.14.9",
+    "astro": "^5.18.2",
+    "sharp": "^0.34.5",
+    "tailwindcss": "^4.1.11"
   },
   "devDependencies": {
     "@rolldown/binding-win32-x64-msvc": "^1.2.4",
     "@types/alpinejs": "^3.13.11",
-    "typescript": "^7.0.2"
+    "typescript": "^5.9.2"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": ["sharp", "esbuild"]
   }
 }
