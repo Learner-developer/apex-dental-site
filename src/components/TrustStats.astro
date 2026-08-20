@@ -1,18 +1,151 @@
 ---
 import { trustStats } from '../data/content';
+
+const tileTints = [
+  'bg-[#1de1da]/15 hover:bg-[#1de1da]/25 border border-[#1de1da]/25 shadow-sm',
+  'bg-[#53ecc2]/20 hover:bg-[#53ecc2]/30 border border-[#53ecc2]/30 shadow-sm',
+  'bg-[#c1f886]/25 hover:bg-[#c1f886]/35 border border-[#c1f886]/35 shadow-sm',
+  'bg-ink text-white hover:bg-ink-soft border border-ink/10 shadow-md',
+];
 ---
 
-<section class="border-y border-stone-200/80 bg-white py-10 md:py-12" aria-label="Clinic statistics">
+<section id="trust-stats-section" class="bg-cream py-12 md:py-16" aria-label="Clinic statistics">
   <div class="section-shell">
-    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
       {
-        trustStats.map((stat) => (
-          <div class="reveal-on-scroll card-surface card-hover p-6 text-center">
-            <p class="text-3xl font-bold text-brand-dark">{stat.value}</p>
-            <p class="mt-2 text-sm leading-relaxed text-stone-600">{stat.label}</p>
+        trustStats.map((stat, index) => (
+          <div
+            class:list={[
+              'reveal-on-scroll rounded-3xl p-8 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-md cursor-default',
+              tileTints[index],
+              index === 1 && 'lg:translate-y-4',
+              index === 3 && 'lg:-translate-y-2',
+            ]}
+          >
+            <p
+              class:list={[
+                'font-display text-4xl font-semibold md:text-5xl stat-counter',
+                index === 3 ? 'text-[#1de1da]' : 'text-ink',
+              ]}
+              data-stat-value={stat.value}
+            >
+              {stat.value}
+            </p>
+            <p class:list={['mt-3 text-sm leading-relaxed font-medium', index === 3 ? 'text-white/85' : 'text-ink/75']}>
+              {stat.label}
+            </p>
           </div>
         ))
       }
     </div>
   </div>
 </section>
+
+<script>
+  function parseStat(str: string) {
+    const rangeMatch = str.match(/^(\d+)\s*-\s*(\d+)(.*)$/);
+    if (rangeMatch) {
+      return {
+        type: 'range' as const,
+        start: parseInt(rangeMatch[1], 10),
+        end: parseInt(rangeMatch[2], 10),
+        suffix: rangeMatch[3],
+      };
+    }
+    const decimalMatch = str.match(/^(\d+\.\d+)(.*)$/);
+    if (decimalMatch) {
+      const num = parseFloat(decimalMatch[1]);
+      const decimals = decimalMatch[1].split('.')[1].length;
+      return {
+        type: 'decimal' as const,
+        target: num,
+        decimals,
+        suffix: decimalMatch[2],
+      };
+    }
+    const intMatch = str.match(/^(\d+)(.*)$/);
+    if (intMatch) {
+      return {
+        type: 'integer' as const,
+        target: parseInt(intMatch[1], 10),
+        suffix: intMatch[2],
+      };
+    }
+    return null;
+  }
+
+  function initStatCounters() {
+    const section = document.getElementById('trust-stats-section');
+    if (!section) return;
+
+    const counters = section.querySelectorAll<HTMLElement>('.stat-counter');
+    if (!counters.length) return;
+
+    let hasAnimated = false;
+
+    const animateCounters = () => {
+      if (hasAnimated) return;
+      hasAnimated = true;
+
+      const duration = 1800;
+      const startTime = performance.now();
+
+      const parsedItems = Array.from(counters).map((el) => {
+        const raw = el.dataset.statValue || el.textContent || '';
+        return { el, parsed: parseStat(raw), raw };
+      });
+
+      function step(currentTime: number) {
+        const elapsed = currentTime - startTime;
+        const rawProgress = Math.min(elapsed / duration, 1);
+        // Ease-out cubic for smooth deceleration
+        const progress = 1 - Math.pow(1 - rawProgress, 3);
+
+        parsedItems.forEach(({ el, parsed }) => {
+          if (!parsed) return;
+          if (parsed.type === 'decimal') {
+            const val = (progress * parsed.target).toFixed(parsed.decimals);
+            el.textContent = `${val}${parsed.suffix}`;
+          } else if (parsed.type === 'range') {
+            const startVal = Math.round(progress * parsed.start);
+            const endVal = Math.round(progress * parsed.end);
+            el.textContent = `${startVal}-${endVal}${parsed.suffix}`;
+          } else if (parsed.type === 'integer') {
+            const val = Math.round(progress * parsed.target);
+            el.textContent = `${val}${parsed.suffix}`;
+          }
+        });
+
+        if (rawProgress < 1) {
+          requestAnimationFrame(step);
+        } else {
+          parsedItems.forEach(({ el, raw }) => {
+            el.textContent = raw;
+          });
+        }
+      }
+
+      requestAnimationFrame(step);
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            animateCounters();
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.25,
+        rootMargin: '0px 0px -40px 0px',
+      }
+    );
+
+    observer.observe(section);
+  }
+
+  initStatCounters();
+  document.addEventListener('astro:page-load', initStatCounters);
+</script>

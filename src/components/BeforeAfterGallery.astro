@@ -35,9 +35,10 @@ const galleryData = beforeAfterItems.map((item, index) => ({
 
 {
   SHOW_BEFORE_AFTER_GALLERY && (
-    <section id="before-after" class="bg-white py-16 md:py-24">
+    <section id="before-after" class="bg-white py-20 md:py-28">
       <div class="section-shell">
-        <div class="max-w-3xl">
+        <div class="max-w-2xl">
+          <p class="eyebrow">Clinical cases</p>
           <h2 class="section-title">Before & After Gallery</h2>
           <p class="section-lead">
             A look at real cases treated at Apex Dental. Every result varies by case — ask about your
@@ -45,16 +46,13 @@ const galleryData = beforeAfterItems.map((item, index) => ({
           </p>
         </div>
 
-        <div
-          class="mt-8"
-          x-data="{ filter: 'all', lightbox: null }"
-        >
-          <div class="flex flex-wrap gap-2">
+        <div class="mt-8" x-data="{ filter: 'all', lightbox: null }">
+          <div class="flex flex-wrap gap-2.5">
             {beforeAfterFilters.map((chip) => (
               <button
                 type="button"
-                class="rounded-full px-4 py-2 text-sm font-semibold transition"
-                x-bind:class={`filter === '${chip.id}' ? 'bg-brand text-white' : 'bg-stone-100 text-stone-700 hover:bg-stone-200'`}
+                class="rounded-full px-4 py-2 text-sm font-semibold transition-all duration-200 cursor-pointer active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+                x-bind:class={`filter === '${chip.id}' ? 'bg-ink text-white shadow-sm border border-ink' : 'bg-cream border border-ink/10 text-ink hover:bg-[#1de1da]/20 hover:border-[#1de1da]/60'`}
                 x-on:click={`filter = '${chip.id}'`}
               >
                 {chip.label}
@@ -62,47 +60,65 @@ const galleryData = beforeAfterItems.map((item, index) => ({
             ))}
           </div>
 
-          <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:pb-8">
             {galleryData.map((item) => (
               <button
                 type="button"
-                class="group overflow-hidden rounded-2xl text-left shadow-[var(--shadow-soft)] transition hover:-translate-y-1 hover:shadow-[var(--shadow-lift)]"
+                class:list={[
+                  'group relative overflow-hidden rounded-2xl text-left border border-ink/5 shadow-[var(--shadow-soft)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[var(--shadow-lift)] active:scale-[0.99] cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand',
+                  item.index % 3 === 1 && 'lg:translate-y-6',
+                ]}
                 x-show={`filter === 'all' || filter === '${item.filter}'`}
                 x-on:click={`lightbox = ${item.index}`}
+                aria-label={`View clinical case photo: ${item.alt}`}
               >
-                <Image
-                  src={imageMap[item.index]}
-                  alt={item.alt}
-                  class="aspect-[4/3] w-full object-cover transition group-hover:scale-[1.02]"
-                  widths={[400, 600, 800]}
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                  loading="lazy"
-                />
+                <div class="overflow-hidden">
+                  <Image
+                    src={imageMap[item.index]}
+                    alt={item.alt}
+                    class="aspect-[4/3] w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                    widths={[400, 600, 800]}
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="absolute bottom-3 right-3 rounded-full bg-ink/75 px-3 py-1 text-xs font-semibold text-white backdrop-blur-sm opacity-0 transition-opacity duration-300 group-hover:opacity-100 flex items-center gap-1.5">
+                  <span class="text-[#1de1da]">🔍</span> Expand
+                </div>
               </button>
             ))}
           </div>
 
           <div
-            class="fixed inset-0 z-[60] flex items-center justify-center bg-stone-900/80 p-4"
+            class="fixed inset-0 z-[60] flex items-center justify-center bg-ink/80 p-4 backdrop-blur-sm"
             x-show="lightbox !== null"
             x-cloak
+            x-transition:enter="transition ease-out duration-200"
+            x-transition:enter-start="opacity-0"
+            x-transition:enter-end="opacity-100"
+            x-transition:leave="transition ease-in duration-150"
+            x-transition:leave-start="opacity-100"
+            x-transition:leave-end="opacity-0"
             x-on:click.self="lightbox = null"
             x-on:keydown.escape.window="lightbox = null"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Before and after photo"
           >
-            <div class="relative max-h-[90vh] max-w-5xl overflow-auto rounded-2xl bg-white p-2">
+            <div class="relative max-h-[90vh] max-w-5xl overflow-auto rounded-2xl bg-white p-3 shadow-2xl">
               <button
                 type="button"
-                class="absolute right-3 top-3 rounded-full bg-stone-900/70 px-3 py-1 text-sm text-white"
+                class="absolute right-4 top-4 z-10 inline-flex min-h-10 items-center justify-center rounded-full bg-ink px-4 py-2 text-sm font-semibold text-white transition duration-200 hover:bg-ink-soft active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
                 x-on:click="lightbox = null"
               >
-                Close
+                ✕ Close
               </button>
               {galleryData.map((item) => (
-                <div x-show={`lightbox === ${item.index}`}>
+                <div x-show={`lightbox === ${item.index}`} class="pt-8 md:pt-0">
                   <Image
                     src={imageMap[item.index]}
                     alt={item.alt}
-                    class="max-h-[85vh] w-full rounded-xl object-contain"
+                    class="max-h-[82vh] w-full rounded-xl object-contain"
                     widths={[800, 1200]}
                     sizes="90vw"
                     loading="lazy"

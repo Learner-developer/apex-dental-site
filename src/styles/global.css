@@ -1,62 +1,159 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600;1,700&display=swap");
+@import url("https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&display=swap");
 @import "tailwindcss";
 
 @theme {
-  --color-brand: #0d9488;
-  --color-brand-dark: #0f766e;
-  --color-cream: #fafaf9;
-  --color-cta: #f59e0b;
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --radius-card: 1rem;
-  --shadow-soft: 0 4px 24px rgb(15 23 42 / 0.08);
-  --shadow-lift: 0 12px 32px rgb(15 23 42 / 0.12);
+  --color-ink: #151513;
+  --color-ink-soft: #2a2a27;
+  --color-brand: #26c6da;
+  --color-brand-deep: #0b7484;
+  --color-brand-dark: #0b7484;
+  --color-cta: #151513;
+  --color-cta-hover: #2a2a27;
+  --color-highlight: #26c6da;
+  --color-cream: #f4f5f0;
+  --color-cloud: #f4f5f0;
+  --color-ivory: #f4f5f0;
+  --color-sage: #0b7484;
+  --color-sage-light: #26c6da;
+  --color-muted: #5c5c57;
+
+  /* Fresh Accent Palette */
+  --color-accent-cyan: #24d3e9;
+  --color-accent-mint: #1de1da;
+  --color-accent-seafoam: #53ecc2;
+  --color-accent-spring: #8af4a4;
+  --color-accent-lime: #c1f886;
+  --color-accent-lemon: #f9f871;
+
+  --font-sans: "General Sans", "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Plus Jakarta Sans", "General Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --radius-card: 1.5rem;
+  --shadow-soft: 0 10px 30px rgb(21 21 19 / 0.06);
+  --shadow-lift: 0 20px 44px rgb(21 21 19 / 0.1);
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 6.5rem;
   }
 
   body {
-    @apply bg-cream font-sans text-stone-800 antialiased;
+    @apply bg-cream font-sans text-[1.125rem] leading-[1.6] text-ink antialiased;
   }
 
   ::selection {
-    @apply bg-brand/20 text-stone-900;
+    @apply bg-brand/40 text-ink;
+  }
+
+  [x-cloak] {
+    display: none !important;
   }
 }
 
 @layer components {
   .section-shell {
-    @apply mx-auto max-w-6xl px-4 sm:px-6 lg:px-8;
+    @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .eyebrow {
+    @apply mb-3 text-xs font-semibold uppercase tracking-[0.14em] text-brand-deep;
+  }
+
+  .pill-label {
+    @apply mb-4 inline-flex rounded-full border border-ink/10 bg-white px-3 py-1 text-xs font-semibold uppercase tracking-[0.12em] text-ink transition duration-200 hover:border-brand-deep/30 hover:bg-[#1de1da]/10;
   }
 
   .section-title {
-    @apply text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl;
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 1.2rem + 2.4vw, 3.5rem);
+    line-height: 1.12;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+    @apply font-bold text-ink;
   }
 
   .section-lead {
-    @apply mt-3 max-w-2xl text-base leading-relaxed text-stone-600 sm:text-lg;
+    @apply mt-4 max-w-2xl text-base leading-relaxed text-ink/70 sm:text-lg;
   }
 
   .card-surface {
-    @apply rounded-2xl bg-white shadow-[var(--shadow-soft)] transition duration-200 ease-out;
+    @apply rounded-[1.5rem] bg-white shadow-[var(--shadow-soft)] transition duration-300 ease-out;
   }
 
   .card-hover {
-    @apply hover:-translate-y-1 hover:shadow-[var(--shadow-lift)];
+    @apply transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[var(--shadow-lift)];
   }
 
   .btn-cta {
-    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-cta px-5 py-3 text-sm font-semibold text-stone-900 shadow-sm transition duration-200 ease-out hover:-translate-y-0.5 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand;
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-ink px-6 py-3 text-sm font-semibold tracking-wide text-white shadow-sm transition duration-200 ease-out hover:-translate-y-0.5 hover:bg-ink-soft hover:shadow-md active:translate-y-0 active:scale-[0.98] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand;
   }
 
   .btn-brand {
-    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-brand-dark px-5 py-3 text-sm font-semibold text-white shadow-sm transition duration-200 ease-out hover:-translate-y-0.5 hover:bg-brand hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand;
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-brand px-6 py-3 text-sm font-semibold tracking-wide text-ink shadow-sm transition duration-200 ease-out hover:-translate-y-0.5 hover:brightness-105 hover:shadow-md active:translate-y-0 active:scale-[0.98] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-deep;
+  }
+
+  .btn-ghost {
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-white/70 bg-white/10 px-6 py-3 text-sm font-semibold tracking-wide text-white backdrop-blur-sm transition duration-200 ease-out hover:-translate-y-0.5 hover:bg-white/20 active:translate-y-0 active:scale-[0.98] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white;
   }
 
   .btn-outline {
-    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-stone-300 bg-white px-5 py-3 text-sm font-semibold text-stone-800 transition duration-200 ease-out hover:-translate-y-0.5 hover:border-brand hover:text-brand-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand;
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-ink/20 bg-white px-6 py-3 text-sm font-semibold tracking-wide text-ink transition duration-200 ease-out hover:-translate-y-0.5 hover:border-brand-deep hover:bg-brand/15 active:translate-y-0 active:scale-[0.98] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand;
+  }
+
+  .btn-ink {
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-ink px-6 py-3 text-sm font-semibold tracking-wide text-white transition duration-200 ease-out hover:-translate-y-0.5 hover:bg-ink-soft active:translate-y-0 active:scale-[0.98] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand;
+  }
+
+  .slider-btn {
+    @apply inline-flex h-11 w-11 items-center justify-center rounded-full border border-ink/15 bg-white text-ink shadow-sm transition duration-200 ease-out hover:-translate-y-0.5 hover:scale-105 hover:border-brand hover:bg-[#1de1da]/10 hover:text-ink hover:shadow-md active:translate-y-0 active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand;
+  }
+
+  .skip-link {
+    @apply sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[80] focus:rounded-full focus:bg-ink focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white;
+  }
+
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  .accent-text {
+    color: var(--color-brand-deep);
+  }
+
+  .nav-pill {
+    @apply hidden items-center rounded-full border border-ink/10 bg-white/80 p-1 shadow-sm backdrop-blur lg:flex;
+  }
+
+  .nav-pill-link {
+    @apply rounded-full px-4 py-2 text-sm font-medium text-ink/80 transition duration-200 hover:bg-[#1de1da]/20 hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand;
+  }
+
+  .blob-shape {
+    border-radius: 63% 37% 54% 46% / 55% 48% 52% 45%;
+  }
+
+  .blob-shape-alt {
+    border-radius: 42% 58% 37% 63% / 48% 42% 58% 52%;
+  }
+
+  .icon-badge {
+    @apply inline-flex h-12 w-12 items-center justify-center rounded-2xl text-ink transition-transform duration-300;
+  }
+
+  #site-chrome {
+    transition:
+      background-color 0.3s ease,
+      box-shadow 0.3s ease,
+      border-color 0.3s ease;
+  }
+
+  #site-chrome.is-solid {
+    background: rgb(244 245 240 / 0.94);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgb(21 21 19 / 0.08);
+    box-shadow: 0 4px 24px rgb(21 21 19 / 0.06);
   }
 }
 
@@ -64,18 +161,42 @@
   .reveal-on-scroll {
     animation: reveal-fade-up linear both;
     animation-timeline: view();
-    animation-range: entry 0% cover 30%;
+    animation-range: entry 0% cover 28%;
+  }
+
+  .reveal-delay-1 {
+    animation-range: entry 8% cover 34%;
+  }
+
+  .reveal-delay-2 {
+    animation-range: entry 16% cover 40%;
   }
 
   .btn-cta-primary {
-    animation: cta-pulse 3s ease-in-out infinite;
+    animation: cta-pulse 3.2s ease-in-out infinite;
+  }
+
+  .marquee-track {
+    animation: marquee-scroll 32s linear infinite;
+  }
+
+  .marquee-track:hover {
+    animation-play-state: paused;
+  }
+
+  .blob-float {
+    animation: blob-float 14s ease-in-out infinite;
+  }
+
+  .blob-float-slow {
+    animation: blob-float 18s ease-in-out infinite reverse;
   }
 }
 
 @keyframes reveal-fade-up {
   from {
     opacity: 0;
-    transform: translateY(24px);
+    transform: translateY(20px);
   }
 
   to {
@@ -84,14 +205,35 @@
   }
 }
 
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 @keyframes cta-pulse {
   0%,
   100% {
-    box-shadow: 0 0 0 0 rgb(245 158 11 / 0.35);
+    box-shadow: 0 0 0 0 rgb(38 198 218 / 0.35);
   }
 
   50% {
-    box-shadow: 0 0 0 10px rgb(245 158 11 / 0);
+    box-shadow: 0 0 0 12px rgb(38 198 218 / 0);
+  }
+}
+
+@keyframes blob-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+
+  50% {
+    transform: translate3d(12px, -18px, 0) rotate(8deg);
   }
 }
 
@@ -100,11 +242,11 @@
     scroll-behavior: auto;
   }
 
-  .reveal-on-scroll {
-    animation: none;
-  }
-
-  .btn-cta-primary {
+  .reveal-on-scroll,
+  .marquee-track,
+  .btn-cta-primary,
+  .blob-float,
+  .blob-float-slow {
     animation: none;
   }
 }

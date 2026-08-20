@@ -19,9 +19,19 @@ import img12 from '@visuals/02_clinic_and_facilities/interior_and_equipment/dent
 const tourImages = [img1, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11, img12];
 ---
 
-<section id="gallery" class="py-16 md:py-24">
-  <div class="section-shell">
-    <div class="reveal-on-scroll max-w-3xl">
+<section id="gallery" class="relative overflow-hidden bg-cream py-20 md:py-28">
+  <div
+    class="blob-shape blob-float pointer-events-none absolute -left-20 top-24 hidden h-80 w-80 bg-[#1de1da]/15 blur-2xl lg:block"
+    aria-hidden="true"
+  ></div>
+  <div
+    class="blob-shape-alt blob-float-slow pointer-events-none absolute -right-16 bottom-16 hidden h-72 w-72 bg-[#53ecc2]/15 blur-2xl lg:block"
+    aria-hidden="true"
+  ></div>
+
+  <div class="section-shell relative">
+    <div class="reveal-on-scroll max-w-2xl">
+      <p class="eyebrow">Inside the clinic</p>
       <h2 class="section-title">Clinic & Technology Tour</h2>
       <p class="section-lead">
         Modern operatories, on-site digital imaging, rotary endodontics, and a dedicated sterilization
@@ -29,22 +39,75 @@ const tourImages = [img1, img2, img3, img4, img5, img6, img7, img8, img9, img10,
       </p>
     </div>
 
-    <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {
-        clinicTourItems.map((item, index) => (
-          <figure class="reveal-on-scroll card-surface card-hover overflow-hidden">
-            <Image
-              src={tourImages[index]}
-              alt={altFromFilename(item.filename)}
-              class="aspect-[4/3] w-full object-cover"
-              widths={[400, 600, 800]}
-              sizes="(max-width: 768px) 100vw, 33vw"
-              loading="lazy"
-            />
-            <figcaption class="p-4 text-sm leading-relaxed text-stone-600">{item.caption}</figcaption>
-          </figure>
-        ))
-      }
+    <div class="relative mt-12" x-data="{ active: 0, total: 12 }">
+      <div class="relative overflow-hidden rounded-3xl shadow-[var(--shadow-lift)] border border-ink/5 bg-ink">
+        {
+          clinicTourItems.map((item, index) => (
+            <figure class="relative" x-show={`active === ${index}`} {...(index > 0 ? { 'x-cloak': true } : {})}>
+              <Image
+                src={tourImages[index]}
+                alt={altFromFilename(item.filename)}
+                class="aspect-[16/10] w-full object-cover md:aspect-[21/9]"
+                widths={[640, 960, 1400]}
+                sizes="100vw"
+                loading="lazy"
+              />
+              <figcaption class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/90 via-ink/50 to-transparent p-6 text-white md:p-8">
+                <p class="max-w-2xl text-base leading-relaxed md:text-lg">{item.caption}</p>
+              </figcaption>
+            </figure>
+          ))
+        }
+        <div class="absolute inset-x-0 top-1/2 z-10 flex -translate-y-1/2 justify-between px-3">
+          <button
+            type="button"
+            class="slider-btn"
+            aria-label="Previous clinic photo"
+            @click="active = (active - 1 + total) % total"
+          >
+            ←
+          </button>
+          <button
+            type="button"
+            class="slider-btn"
+            aria-label="Next clinic photo"
+            @click="active = (active + 1) % total"
+          >
+            →
+          </button>
+        </div>
+      </div>
+
+      <div class="mt-5 flex gap-3 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" role="tablist" aria-label="Clinic photos">
+        {
+          clinicTourItems.map((item, index) => (
+            <button
+              type="button"
+              class="h-16 w-24 shrink-0 overflow-hidden rounded-xl ring-2 transition-all duration-200 cursor-pointer active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+              :class={`active === ${index} ? 'ring-[#1de1da] opacity-100 scale-105 shadow-md' : 'ring-transparent opacity-70 hover:opacity-100 hover:scale-102'`}
+              @click={`active = ${index}`}
+              :aria-selected={`active === ${index}`}
+              aria-label={altFromFilename(item.filename)}
+            >
+              <Image
+                src={tourImages[index]}
+                alt=""
+                class="h-full w-full object-cover"
+                widths={[160]}
+                sizes="96px"
+                loading="lazy"
+              />
+            </button>
+          ))
+        }
+      </div>
+      <p class="sr-only" aria-live="polite" x-text="`Photo ${active + 1} of ${total}`"></p>
     </div>
   </div>
 </section>
+
+<style>
+  [x-cloak] {
+    display: none !important;
+  }
+</style>

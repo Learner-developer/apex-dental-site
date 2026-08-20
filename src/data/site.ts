@@ -22,6 +22,7 @@ export const hours = {
 
 export const googleMapsCid = '16137579278529908569';
 export const mapEmbedUrl = `https://maps.google.com/maps?q=${encodeURIComponent(address)}&cid=${googleMapsCid}&hl=en&z=16&output=embed`;
+export const googleReviewsUrl = `https://www.google.com/maps?cid=${googleMapsCid}`;
 
 export const seo = {
   title: 'Apex Dental & Orthodontic Clinic | Vidyaranyapura, Bengaluru',

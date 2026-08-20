@@ -1,50 +1,44 @@
 ---
 import { Image } from 'astro:assets';
-import logo from '@visuals/01_branding_and_credentials/apex-dental-clinic-3d-wall-logo.jpg';
+import logo from '@visuals/01_branding_and_credentials/apex-dental-clinic-3d-wall-logo.png';
 import { navLinks, whatsappUrl } from '../data/site';
 ---
 
-<header
-  id="site-header"
-  class="sticky top-0 z-50 border-b border-stone-200/80 bg-cream/95 backdrop-blur-md transition-all duration-200"
-  x-data="{ open: false, condensed: false }"
-  x-init="window.addEventListener('scroll', () => { condensed = window.scrollY > 100 })"
-  :class="condensed ? 'shadow-sm' : ''"
->
+<header x-data="{ open: false }" @keydown.escape.window="open = false">
   <div class="section-shell flex items-center justify-between gap-4 py-3 md:py-4">
-    <a href="#" class="flex shrink-0 items-center gap-3" aria-label="Apex Dental home">
+    <a href="#" class="flex shrink-0 items-center transition-transform duration-300 hover:scale-[1.02]" aria-label="Apex Dental home">
       <Image
         src={logo}
         alt="Apex Dental and Orthodontic Clinic logo"
-        class="header-logo h-12 w-auto transition-all duration-200 md:h-14"
-        widths={[120, 180, 240]}
-        sizes="(max-width: 768px) 120px, 180px"
+        class="h-12 w-auto sm:h-14 md:h-16 object-contain"
+        widths={[180, 260, 360, 480]}
+        sizes="(max-width: 768px) 180px, 260px"
       />
     </a>
 
-    <nav class="hidden items-center gap-6 lg:flex" aria-label="Primary">
+    <nav class="nav-pill" aria-label="Primary">
       {
         navLinks.map((link) => (
-          <a
-            href={link.href}
-            class="text-sm font-medium text-stone-700 transition hover:text-brand-dark"
-          >
+          <a href={link.href} class="nav-pill-link">
             {link.label}
           </a>
         ))
       }
-      <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="btn-cta btn-cta-primary">
+    </nav>
+
+    <div class="hidden lg:block">
+      <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="btn-cta">
         Book Now
       </a>
-    </nav>
+    </div>
 
     <button
       type="button"
-      class="inline-flex items-center justify-center rounded-lg border border-stone-300 p-2 text-stone-700 lg:hidden"
-      @click="open = !open"
-      :aria-expanded="open.toString()"
+      class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-ink/20 text-ink transition-all duration-200 hover:border-brand hover:bg-[#1de1da]/10 active:scale-95 lg:hidden"
+      @click="open = true"
+      :aria-expanded="open"
       aria-controls="mobile-nav"
-      aria-label="Toggle navigation menu"
+      aria-label="Open navigation menu"
     >
       <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
@@ -54,62 +48,57 @@ import { navLinks, whatsappUrl } from '../data/site';
 
   <div
     id="mobile-nav"
-    class="border-t border-stone-200 bg-white px-4 py-4 lg:hidden"
+    class="fixed inset-0 z-[70] bg-cream px-6 py-8 lg:hidden flex flex-col justify-between"
     x-show="open"
-    x-transition
+    x-transition:enter="transition ease-out duration-300"
+    x-transition:enter-start="opacity-0 -translate-y-4"
+    x-transition:enter-end="opacity-100 translate-y-0"
+    x-transition:leave="transition ease-in duration-200"
+    x-transition:leave-start="opacity-100 translate-y-0"
+    x-transition:leave-end="opacity-0 -translate-y-4"
     x-cloak
+    role="dialog"
+    aria-modal="true"
+    aria-label="Navigation"
   >
-    <nav class="flex flex-col gap-3" aria-label="Mobile">
-      {
-        navLinks.map((link) => (
-          <a
-            href={link.href}
-            class="rounded-lg px-3 py-2 text-sm font-medium text-stone-700 hover:bg-stone-50"
-            @click="open = false"
-          >
-            {link.label}
-          </a>
-        ))
-      }
-      <a
-        href={whatsappUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="btn-cta mt-2 w-full"
-      >
-        Book Now
+    <div>
+      <div class="flex items-center justify-between">
+        <Image
+          src={logo}
+          alt="Apex Dental and Orthodontic Clinic logo"
+          class="h-11 w-auto object-contain"
+          widths={[160, 240]}
+          sizes="160px"
+        />
+        <button
+          type="button"
+          class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-ink/15 text-ink transition duration-200 hover:bg-ink/5 active:scale-95"
+          @click="open = false"
+          aria-label="Close navigation menu"
+        >
+          <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+      <nav class="mt-10 flex flex-col gap-2" aria-label="Mobile">
+        {
+          navLinks.map((link) => (
+            <a
+              href={link.href}
+              class="rounded-full px-5 py-3 text-lg font-semibold text-ink transition duration-200 hover:bg-[#1de1da]/20 active:scale-98"
+              @click="open = false"
+            >
+              {link.label}
+            </a>
+          ))
+        }
+      </nav>
+    </div>
+    <div class="pt-6 border-t border-ink/10">
+      <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="btn-cta w-full text-center">
+        Book on WhatsApp
       </a>
-    </nav>
+    </div>
   </div>
 </header>
-
-<style>
-  [x-cloak] {
-    display: none !important;
-  }
-
-  #site-header:not(.is-condensed) .header-logo {
-    height: 3rem;
-  }
-
-  @media (min-width: 768px) {
-    #site-header:not(.is-condensed) .header-logo {
-      height: 4rem;
-    }
-
-    #site-header.is-condensed .header-logo {
-      height: 3rem;
-    }
-  }
-</style>
-
-<script>
-  const header = document.getElementById('site-header');
-  if (header) {
-    const onScroll = () => {
-      header.classList.toggle('is-condensed', window.scrollY > 100);
-    };
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-  }
-</script>

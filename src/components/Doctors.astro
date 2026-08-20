@@ -5,30 +5,52 @@ import certificatesImg from '@visuals/01_branding_and_credentials/dr-jyothi-sajj
 import nskImg from '@visuals/02_clinic_and_facilities/interior_and_equipment/nsk-endo-mate-dt-rotary-endodontic-motor.jpg';
 ---
 
-<section id="doctors" class="bg-white py-16 md:py-24">
-  <div class="section-shell">
-    <div class="reveal-on-scroll max-w-3xl">
+<section id="doctors" class="relative overflow-hidden bg-white py-20 md:py-28">
+  <div
+    class="blob-shape blob-float pointer-events-none absolute -left-20 top-32 hidden h-80 w-80 bg-[#1de1da]/15 blur-2xl lg:block"
+    aria-hidden="true"
+  ></div>
+  <div
+    class="blob-shape-alt blob-float-slow pointer-events-none absolute -right-16 bottom-20 hidden h-64 w-64 bg-[#53ecc2]/15 blur-2xl lg:block"
+    aria-hidden="true"
+  ></div>
+
+  <div class="section-shell relative">
+    <div class="reveal-on-scroll max-w-2xl">
+      <p class="eyebrow">The team</p>
       <h2 class="section-title">Meet the Doctors</h2>
       <p class="section-lead">
         Specialist-led care from consultation through treatment and follow-up.
       </p>
     </div>
 
-    <div class="mt-10 grid gap-8 lg:grid-cols-3">
-      <article class="reveal-on-scroll card-surface card-hover overflow-hidden lg:col-span-2">
+    <div class="mt-12 grid gap-8 lg:grid-cols-12 lg:items-start">
+      <article class="reveal-on-scroll card-hover overflow-hidden rounded-3xl bg-cream border border-ink/5 lg:col-span-7">
         <div class="grid md:grid-cols-2">
-          <Image
-            src={consultationImg}
-            alt="Dr. Jyothi Sajjan in a patient consultation at her desk"
-            class="h-full min-h-[260px] w-full object-cover"
-            widths={[400, 600, 800]}
-            sizes="(max-width: 768px) 100vw, 33vw"
-            loading="lazy"
-          />
-          <div class="p-6 md:p-8">
-            <h3 class="text-2xl font-bold text-stone-900">Dr. Jyothi Sajjan</h3>
-            <p class="mt-1 text-sm font-medium text-brand-dark">BDS, MDS Orthodontics & Dentofacial Orthopedics</p>
-            <p class="mt-4 leading-relaxed text-stone-600">
+          <div class="group relative min-h-[320px] overflow-hidden">
+            <Image
+              src={consultationImg}
+              alt="Dr. Jyothi Sajjan in a patient consultation at her desk"
+              class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+              widths={[400, 600, 900]}
+              sizes="(max-width: 768px) 100vw, 40vw"
+              loading="lazy"
+            />
+            <span
+              class="absolute left-4 top-4 rounded-full bg-[#1de1da] px-3.5 py-1 text-xs font-bold text-ink shadow-sm tracking-wide"
+            >
+              Lead Orthodontist
+            </span>
+            <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/80 p-5 text-white md:hidden">
+              <h3 class="font-display text-2xl font-bold">Dr. Jyothi Sajjan</h3>
+            </div>
+          </div>
+          <div class="p-6 md:p-10 flex flex-col justify-center">
+            <h3 class="hidden font-display text-3xl font-bold text-ink md:block">Dr. Jyothi Sajjan</h3>
+            <p class="mt-2 text-sm font-semibold uppercase tracking-[0.08em] text-brand-deep">
+              BDS, MDS Orthodontics & Dentofacial Orthopedics
+            </p>
+            <p class="mt-5 leading-relaxed text-ink/75">
               Dr. Jyothi Sajjan holds a BDS and an MDS in Orthodontics & Dentofacial Orthopedics,
               and is registered with the Karnataka State Dental Council. She leads every orthodontic
               case at Apex Dental personally — from the first consultation through to the final
@@ -37,44 +59,48 @@ import nskImg from '@visuals/02_clinic_and_facilities/interior_and_equipment/nsk
             </p>
           </div>
         </div>
-        <div class="border-t border-stone-100 p-4 md:p-6">
+        <div class="border-t border-ink/5 p-4 md:p-6 bg-white/40">
           <Image
             src={certificatesImg}
             alt="Dr. Jyothi Sajjan BDS and MDS certificates and Karnataka State Dental Council registration"
-            class="w-full rounded-xl object-cover"
+            class="w-full rounded-2xl object-cover transition-transform duration-300 hover:scale-[1.01]"
             widths={[640, 960, 1200]}
-            sizes="(max-width: 1024px) 100vw, 66vw"
+            sizes="(max-width: 1024px) 100vw, 58vw"
             loading="lazy"
           />
         </div>
       </article>
 
-      <article class="reveal-on-scroll card-surface card-hover overflow-hidden">
+      <article class="group reveal-on-scroll reveal-delay-1 card-hover relative flex flex-col overflow-hidden rounded-3xl bg-cream border border-ink/5 lg:col-span-5 lg:mt-16">
+        <div class="blob-shape pointer-events-none absolute -right-10 -top-10 h-32 w-32 bg-[#53ecc2]/25 blur-xl" aria-hidden="true"></div>
         <div class="overflow-hidden">
           <Image
             src={nskImg}
             alt="NSK Endo-Mate DT rotary endodontic motor used for root canal treatment"
-            class="aspect-video w-full object-cover"
+            class="aspect-[16/10] w-full object-cover transition-transform duration-500 group-hover:scale-105"
             widths={[400, 600]}
-            sizes="(max-width: 1024px) 100vw, 33vw"
+            sizes="(max-width: 1024px) 100vw, 40vw"
             loading="lazy"
           />
         </div>
-        <div class="p-6">
+        <div class="relative flex flex-1 flex-col p-6 md:p-8">
           <div class="mb-4 flex items-center gap-3">
-            <div
-              class="flex h-14 w-14 items-center justify-center rounded-full bg-brand text-lg font-bold text-white"
-              aria-hidden="true"
-            >
-              DM
+            <div class="relative">
+              <div class="blob-shape absolute -inset-1 bg-[#1de1da]/60" aria-hidden="true"></div>
+              <div
+                class="relative flex h-14 w-14 items-center justify-center rounded-full bg-ink font-display text-lg font-bold text-[#1de1da]"
+                aria-hidden="true"
+              >
+                DM
+              </div>
             </div>
             <div>
-              <h3 class="text-xl font-bold text-stone-900">Dr. Monika</h3>
-              <p class="text-sm font-medium text-brand-dark">Endodontics</p>
+              <h3 class="font-display text-2xl font-bold text-ink">Dr. Monika</h3>
+              <p class="text-sm font-semibold uppercase tracking-[0.08em] text-brand-deep">Endodontics</p>
             </div>
           </div>
           <!-- TODO: Confirm Dr. Monika's degree/registration details with the clinic before publishing — not included in the source data. -->
-          <p class="leading-relaxed text-stone-600">
+          <p class="leading-relaxed text-ink/75">
             Dr. Monika handles root canal and endodontic care at Apex Dental, using rotary
             endodontic technology and digital imaging to keep root canal treatment quick and as
             comfortable as possible.

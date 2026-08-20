@@ -1,47 +1,70 @@
 ---
-import { clinicName, hours, navLinks, phoneDisplay, tagline, telUrl } from '../data/site';
+import { Image } from 'astro:assets';
+import logo from '@visuals/01_branding_and_credentials/apex-dental-clinic-3d-wall-logo.png';
+import { clinicName, navLinks, phoneDisplay, tagline, telUrl, whatsappUrl } from '../data/site';
 ---
 
-<footer class="border-t border-stone-200 bg-stone-900 py-12 text-stone-300">
+<footer class="bg-ink py-16 text-white/75">
   <div class="section-shell">
-    <div class="grid gap-8 md:grid-cols-3">
+    <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
       <div>
-        <p class="text-lg font-bold text-white">{clinicName}</p>
-        <p class="mt-2 text-sm">{tagline}</p>
+        <a href="#" class="inline-block" aria-label="Apex Dental home">
+          <Image
+            src={logo}
+            alt="Apex Dental and Orthodontic Clinic logo"
+            class="h-14 w-auto sm:h-16 md:h-20 object-contain"
+            widths={[200, 280, 400, 520]}
+            sizes="(max-width: 768px) 200px, 280px"
+          />
+        </a>
+        <p class="mt-4 text-sm leading-relaxed text-white/75">{tagline}</p>
+        <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="btn-brand mt-6">
+          Book on WhatsApp
+        </a>
       </div>
 
       <div>
-        <p class="font-semibold text-white">Quick links</p>
-        <ul class="mt-3 space-y-2 text-sm">
+        <p class="text-sm font-semibold uppercase tracking-[0.08em] text-[#1de1da]">Hours</p>
+        <p class="mt-4 text-sm">Monday–Saturday</p>
+        <p class="mt-1 text-sm">9:30 AM–2:00 PM</p>
+        <p class="mt-1 text-sm">4:30–8:30 PM</p>
+        <p class="mt-2 text-sm text-white/50">Closed Sunday</p>
+      </div>
+
+      <div>
+        <p class="text-sm font-semibold uppercase tracking-[0.08em] text-[#1de1da]">Quick links</p>
+        <ul class="mt-4 space-y-2.5 text-sm">
           {
-            navLinks
-              .filter((link) => link.label !== 'Gallery')
-              .map((link) => (
-                <li>
-                  <a href={link.href} class="hover:text-white">
-                    {link.label}
-                  </a>
-                </li>
-              ))
+            navLinks.map((link) => (
+              <li>
+                <a href={link.href} class="inline-block transition-all duration-200 hover:text-[#1de1da] hover:translate-x-1">
+                  {link.label}
+                </a>
+              </li>
+            ))
           }
         </ul>
       </div>
 
       <div>
-        <p class="font-semibold text-white">Contact</p>
-        <p class="mt-3 text-sm">
-          Mon-Sat, 9:30 AM-2 PM & 4:30-8:30 PM · Closed Sunday
-        </p>
-        <p class="mt-2 text-sm">
-          <a href={telUrl} class="font-medium text-white hover:underline">
+        <p class="text-sm font-semibold uppercase tracking-[0.08em] text-[#1de1da]">Contact</p>
+        <p class="mt-4 text-sm">
+          <a href={telUrl} class="font-medium text-white transition-colors duration-200 hover:text-[#1de1da]">
             {phoneDisplay}
           </a>
-          · Vidyaranyapura, Bengaluru
         </p>
+        <p class="mt-2 text-sm">Vidyaranyapura, Bengaluru</p>
       </div>
     </div>
 
-    <p class="mt-10 border-t border-stone-700 pt-6 text-center text-xs text-stone-500">
+    <p
+      class="mt-16 select-none font-display text-[clamp(3.5rem,14vw,11rem)] font-bold leading-[0.8] tracking-[-0.06em] text-white/10"
+      aria-hidden="true"
+    >
+      APEX DENTAL
+    </p>
+
+    <p class="mt-8 border-t border-white/10 pt-6 text-center text-xs text-white/40">
       © {new Date().getFullYear()} {clinicName}. All rights reserved.
     </p>
   </div>

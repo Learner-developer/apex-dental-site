@@ -1,7 +1,7 @@
 ---
 import '../styles/global.css';
 import { ClientRouter } from 'astro:transitions';
-import { clinicName, seo } from '../data/site';
+import { seo } from '../data/site';
 import AnnouncementBar from '../components/AnnouncementBar.astro';
 import Header from '../components/Header.astro';
 import StickyMobileCTA from '../components/StickyMobileCTA.astro';
@@ -24,13 +24,19 @@ const { title = seo.title, description = seo.description } = Astro.props;
     <meta property="og:description" content={seo.ogDescription} />
     <meta property="og:type" content="website" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600;1,700&display=swap" rel="stylesheet" />
     <title>{title}</title>
     <ClientRouter />
   </head>
-  <body class="pb-20 md:pb-0">
-    <AnnouncementBar />
-    <Header />
-    <main>
+  <body class="pb-24 md:pb-0">
+    <a href="#main" class="skip-link">Skip to content</a>
+    <div id="site-chrome" class="fixed inset-x-0 top-0 z-50 transition duration-300">
+      <AnnouncementBar />
+      <Header />
+    </div>
+    <main id="main">
       <slot />
     </main>
     <StickyMobileCTA />
@@ -41,4 +47,13 @@ const { title = seo.title, description = seo.description } = Astro.props;
   import Alpine from 'alpinejs';
   window.Alpine = Alpine;
   Alpine.start();
+
+  const chrome = document.getElementById('site-chrome');
+  if (chrome) {
+    const onScroll = () => {
+      chrome.classList.toggle('is-solid', window.scrollY > 80);
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
 </script>

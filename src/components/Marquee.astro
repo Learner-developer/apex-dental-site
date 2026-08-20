@@ -1,0 +1,25 @@
+---
+const phrases = [
+  '4.97★ Rated',
+  'MDS-Led Care',
+  '50,000+ Happy Patients',
+  'Free Braces Consultation',
+];
+const loop = [...phrases, ...phrases, ...phrases];
+---
+
+<section class="overflow-hidden bg-ink py-6" aria-label="Clinic highlights">
+  <div class="flex whitespace-nowrap">
+    <div class="marquee-track flex min-w-full items-center gap-8 pr-8">
+      {
+        loop.map((phrase) => (
+          <span class="inline-flex items-center gap-8 text-lg font-semibold tracking-wide text-white md:text-xl transition-colors duration-200 hover:text-[#1de1da]">
+            <span class="text-[#1de1da] text-xl" aria-hidden="true">✦</span>
+            <span>{phrase.includes('★') ? phrase.replace('★', '') : phrase}</span>
+            {phrase.includes('★') && <span class="text-[#f9f871] -ml-6">★</span>}
+          </span>
+        ))
+      }
+    </div>
+  </div>
+</section>
