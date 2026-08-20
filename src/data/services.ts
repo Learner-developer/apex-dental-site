@@ -134,8 +134,7 @@ export const services: ServiceDepartment[] = [
       },
     ],
     footer: 'Free initial consultation · Average 7-11 month treatment completion',
-    imagePath:
-      '04_treatment_educational/braces-types-lingual-metal-ceramic-clear.webp',
+    imagePath: 'services/Teeth Alignment.webp',
     whatsappQuery: "Hi Dr. Jyothi, I'd like to book a free braces/aligners consultation at Apex Dental.",
   },
   {
@@ -161,8 +160,7 @@ export const services: ServiceDepartment[] = [
       },
     ],
     footer: 'Chairside digital radiography · NSK micro-motor gentle canal shaping',
-    imagePath:
-      '02_clinic_and_facilities/interior_and_equipment/nsk-endo-mate-dt-rotary-endodontic-motor.jpg',
+    imagePath: 'services/Root Canal (RCT).webp',
     whatsappQuery: "Hi Apex Dental, I'd like to consult for a Root Canal Treatment (RCT).",
   },
   {
@@ -195,8 +193,7 @@ export const services: ServiceDepartment[] = [
       },
     ],
     footer: 'Hospital-grade titanium implants · Premium CAD/CAM zirconia materials',
-    imagePath:
-      '02_clinic_and_facilities/interior_and_equipment/dental-chair-unit-side-view.webp',
+    imagePath: 'services/Dental Implant.webp',
     whatsappQuery: "Hi Apex Dental, I'd like to book an appointment for Dental Implants / Crowns.",
   },
   {
@@ -229,7 +226,7 @@ export const services: ServiceDepartment[] = [
       },
     ],
     footer: 'Conservative tooth preservation · High-polish aesthetic composite resins',
-    imagePath: '03_doctor_and_team/dr-jyothi-sajjan-patient-consultation-desk.webp',
+    imagePath: 'services/Teeth Whitening.webp',
     whatsappQuery: "Hi Apex Dental, I'd like to book a consultation for Teeth Whitening / Cosmetic Bonding.",
   },
   {
@@ -261,7 +258,7 @@ export const services: ServiceDepartment[] = [
       },
     ],
     footer: 'Local anesthesia protocols · Proactive post-op care calls',
-    imagePath: '03_doctor_and_team/dental-examination-instruments-procedure-closeup.webp',
+    imagePath: 'services/Oral Surgery.webp',
     whatsappQuery: "Hi Apex Dental, I'd like to consult for Wisdom Tooth Removal / Extraction.",
   },
   {
@@ -290,8 +287,7 @@ export const services: ServiceDepartment[] = [
       },
     ],
     footer: 'Dedicated autoclave sterilization · Annual preventive maintenance',
-    imagePath:
-      '02_clinic_and_facilities/interior_and_equipment/clinic-interior-operatory-and-sterilization-room.webp',
+    imagePath: 'services/Teeth Cleaning & Gum Care.webp',
     whatsappQuery: "Hi Apex Dental, I'd like to book an appointment for Teeth Cleaning / Scaling.",
   },
   {
@@ -320,8 +316,7 @@ export const services: ServiceDepartment[] = [
       },
     ],
     footer: 'Gentle pedodontic techniques · Long-term pediatric arch tracking',
-    imagePath:
-      '02_clinic_and_facilities/interior_and_equipment/treatment-operatory-green-chair-setup.webp',
+    imagePath: 'banner/banner-family-pediatric.webp',
     whatsappQuery: "Hi Apex Dental, I'd like to book a pediatric/family dental checkup.",
   },
 ];
