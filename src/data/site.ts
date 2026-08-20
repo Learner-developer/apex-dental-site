@@ -103,8 +103,10 @@ export const seo = {
 };
 
 export const navLinks = [
-  { label: 'Services', href: '#services' },
+  { label: 'Specialty', href: '#services' },
   { label: 'Meet the Doctors', href: '#doctors' },
+  { label: 'Results', href: '#before-after' },
+  { label: 'Reviews', href: '#reviews' },
   { label: 'Clinic Tour', href: '#gallery' },
 ] as const;
 
