@@ -1,36 +1,110 @@
 ---
 import '../styles/global.css';
 import { ClientRouter } from 'astro:transitions';
-import { seo } from '../data/site';
+import { seo, siteUrl, geo, clinicName } from '../data/site';
 import AnnouncementBar from '../components/AnnouncementBar.astro';
 import Header from '../components/Header.astro';
 import StickyMobileCTA from '../components/StickyMobileCTA.astro';
+import ScrollToTop from '../components/ScrollToTop.astro';
+import SchemaMarkup from '../components/SchemaMarkup.astro';
+import Analytics from '../components/Analytics.astro';
 
 interface Props {
   title?: string;
   description?: string;
+  image?: string;
+  canonical?: string;
 }
 
-const { title = seo.title, description = seo.description } = Astro.props;
+const {
+  title = seo.title,
+  description = seo.description,
+  image = seo.ogImage,
+  canonical,
+} = Astro.props;
+
+const canonicalUrl = canonical || new URL(Astro.url.pathname, siteUrl).href.replace(/\/$/, '') || siteUrl;
+const ogImageUrl = image.startsWith('http') ? image : new URL(image, siteUrl).href;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" dir="ltr" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Primary SEO Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
     <meta name="description" content={description} />
+    <meta name="author" content="Dr. Jyothi Sajjan, MDS Orthodontics" />
+    <meta name="keywords" content={seo.keywords} />
+    <meta name="theme-color" content="#26c6da" />
+    <meta name="application-name" content={clinicName} />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Geo & Local SEO Meta Tags -->
+    <meta name="geo.region" content={geo.region} />
+    <meta name="geo.placename" content={geo.placename} />
+    <meta name="geo.position" content={`${geo.latitude};${geo.longitude}`} />
+    <meta name="ICBM" content={`${geo.latitude}, ${geo.longitude}`} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={seo.siteName} />
+    <meta property="og:url" content={canonicalUrl} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={seo.ogDescription} />
-    <meta property="og:type" content="website" />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:secure_url" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Apex Dental & Orthodontic Clinic in Vidyaranyapura, Bengaluru" />
+    <meta property="og:locale" content={seo.locale} />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={seo.ogDescription} />
+    <meta name="twitter:image" content={ogImageUrl} />
+    <meta name="twitter:image:alt" content="Apex Dental & Orthodontic Clinic" />
+
+    <!-- Favicon & PWA Icons -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+
+    <!-- DNS Prefetch & Preconnect for High-Speed Asset Delivery -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+    <link rel="dns-prefetch" href="https://api.fontshare.com" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600;1,700&display=swap" rel="stylesheet" />
-    <title>{title}</title>
+    <link rel="preconnect" href="https://api.fontshare.com" />
+
+    <!-- Web Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500;1,6..72,600&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- JSON-LD Structured Data Schema -->
+    <SchemaMarkup />
+
+    <!-- Google Analytics 4 & Declarative Event Tracking -->
+    <Analytics />
+
     <ClientRouter />
   </head>
-  <body class="pb-24 md:pb-0">
+  <body class="pb-[calc(4.75rem+env(safe-area-inset-bottom,0px))] md:pb-0 overflow-x-clip">
     <a href="#main" class="skip-link">Skip to content</a>
     <div id="site-chrome" class="fixed inset-x-0 top-0 z-50 transition duration-300">
       <AnnouncementBar />
@@ -39,6 +113,7 @@ const { title = seo.title, description = seo.description } = Astro.props;
     <main id="main">
       <slot />
     </main>
+    <ScrollToTop />
     <StickyMobileCTA />
   </body>
 </html>
@@ -51,9 +126,12 @@ const { title = seo.title, description = seo.description } = Astro.props;
   const chrome = document.getElementById('site-chrome');
   if (chrome) {
     const onScroll = () => {
-      chrome.classList.toggle('is-solid', window.scrollY > 80);
+      const scrolled = window.scrollY > 40;
+      chrome.classList.toggle('hide-announcement', scrolled);
+      chrome.classList.toggle('is-solid', scrolled);
     };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
   }
 </script>
+

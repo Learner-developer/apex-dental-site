@@ -8,18 +8,72 @@ const phrases = [
 const loop = [...phrases, ...phrases, ...phrases];
 ---
 
-<section class="overflow-hidden bg-ink py-6" aria-label="Clinic highlights">
-  <div class="flex whitespace-nowrap">
+<section class="relative overflow-hidden bg-white py-6 border-y border-ink/8" aria-label="Clinic highlights">
+  <!-- Subtle Translucent Eyebrow Gradient Overlay on top of White Canvas -->
+  <div
+    class="marquee-subtle-gradient pointer-events-none absolute inset-0 opacity-25"
+    aria-hidden="true"
+  ></div>
+
+  <!-- Soft Ambient Glow Orbs -->
+  <div
+    class="pointer-events-none absolute -left-20 top-1/2 -translate-y-1/2 h-32 w-64 rounded-full bg-[#fb7185]/15 blur-3xl"
+    aria-hidden="true"
+  ></div>
+  <div
+    class="pointer-events-none absolute left-1/3 top-1/2 -translate-y-1/2 h-32 w-72 rounded-full bg-[#c084fc]/15 blur-3xl"
+    aria-hidden="true"
+  ></div>
+  <div
+    class="pointer-events-none absolute right-1/4 top-1/2 -translate-y-1/2 h-32 w-72 rounded-full bg-[#38bdf8]/15 blur-3xl"
+    aria-hidden="true"
+  ></div>
+  <div
+    class="pointer-events-none absolute -right-20 top-1/2 -translate-y-1/2 h-32 w-64 rounded-full bg-[#f59e0b]/15 blur-3xl"
+    aria-hidden="true"
+  ></div>
+
+  <div class="relative z-10 flex whitespace-nowrap">
     <div class="marquee-track flex min-w-full items-center gap-8 pr-8">
       {
         loop.map((phrase) => (
-          <span class="inline-flex items-center gap-8 text-lg font-semibold tracking-wide text-white md:text-xl transition-colors duration-200 hover:text-[#1de1da]">
-            <span class="text-[#1de1da] text-xl" aria-hidden="true">✦</span>
+          <span class="inline-flex items-center gap-8 font-display text-lg font-bold tracking-wide text-ink md:text-xl transition-colors duration-200 hover:text-brand-deep">
+            <span class="text-[#38bdf8] text-xl select-none" aria-hidden="true">✦</span>
             <span>{phrase.includes('★') ? phrase.replace('★', '') : phrase}</span>
-            {phrase.includes('★') && <span class="text-[#f9f871] -ml-6">★</span>}
+            {phrase.includes('★') && <span class="text-[#f59e0b] -ml-6 select-none">★</span>}
           </span>
         ))
       }
     </div>
   </div>
 </section>
+
+<style>
+  .marquee-subtle-gradient {
+    background: linear-gradient(
+      115deg,
+      #fb7185 0%,
+      #c084fc 25%,
+      #38bdf8 55%,
+      #f59e0b 80%,
+      #fb7185 100%
+    );
+    background-size: 200% 200%;
+    animation: subtle-gradient-shift 14s ease-in-out infinite alternate;
+  }
+
+  @keyframes subtle-gradient-shift {
+    0% {
+      background-position: 0% 50%;
+    }
+    100% {
+      background-position: 100% 50%;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-subtle-gradient {
+      animation: none;
+    }
+  }
+</style>

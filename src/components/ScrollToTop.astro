@@ -1,0 +1,49 @@
+---
+---
+
+<button
+  id="scroll-to-top"
+  type="button"
+  aria-label="Scroll back to top"
+  class="fixed bottom-20 right-4 md:bottom-8 md:right-8 z-40 inline-flex h-11 w-11 items-center justify-center rounded-full bg-white/90 text-ink shadow-[0_4px_20px_rgba(21,21,19,0.14)] backdrop-blur-md border border-ink/10 transition-all duration-300 ease-out opacity-0 pointer-events-none translate-y-3 hover:bg-white hover:border-[#38bdf8] hover:text-[#38bdf8] hover:-translate-y-1 hover:shadow-lg active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand cursor-pointer"
+>
+  <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M5 15l7-7 7 7"></path>
+  </svg>
+</button>
+
+<style>
+  #scroll-to-top.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+</style>
+
+<script>
+  function setupScrollToTop() {
+    const btn = document.getElementById('scroll-to-top');
+    if (!btn) return;
+
+    const toggleVisible = () => {
+      if (window.scrollY > 400) {
+        btn.classList.add('is-visible');
+      } else {
+        btn.classList.remove('is-visible');
+      }
+    };
+
+    window.addEventListener('scroll', toggleVisible, { passive: true });
+    toggleVisible();
+
+    btn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+    });
+  }
+
+  setupScrollToTop();
+  document.addEventListener('astro:page-load', setupScrollToTop);
+</script>

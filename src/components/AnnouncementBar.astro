@@ -2,15 +2,21 @@
 import { whatsappUrl } from '../data/site';
 ---
 
-<div class="relative z-[60] bg-ink px-4 py-2 text-center text-sm text-[#1de1da] border-b border-white/10">
+<div
+  id="announcement-bar"
+  class="relative z-[60] bg-[#15151330] backdrop-blur-sm px-4 py-2 text-center text-xs sm:text-sm text-[#38bdf8] border-b border-white/10 overflow-hidden"
+>
   <a
     href={whatsappUrl}
     target="_blank"
     rel="noopener noreferrer"
-    class="group inline-flex items-center justify-center gap-1.5 font-medium tracking-wide transition-colors duration-200 hover:text-white"
+    data-analytics-event="click_whatsapp"
+    data-analytics-location="announcement_bar"
+    data-analytics-label="Free Braces Announcement"
+    class="group inline-flex items-center justify-center gap-1.5 font-medium tracking-[0.01em] transition-colors duration-200 hover:text-white"
   >
     <span>✨ Free Braces & Aligner Consultation This Month</span>
-    <span class="font-semibold underline underline-offset-4">Book on WhatsApp</span>
+    <span class="font-bold underline underline-offset-4">Book on WhatsApp</span>
     <span class="inline-block transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true">→</span>
   </a>
 </div>

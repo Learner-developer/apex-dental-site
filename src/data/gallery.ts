@@ -1,90 +1,123 @@
 export type ClinicTourCategory =
+  | 'all'
   | 'operatory'
   | 'technology'
-  | 'sterilization'
-  | 'entrance'
+  | 'care'
   | 'facility';
 
 export interface ClinicTourItem {
   filename: string;
   path: string;
+  title: string;
+  tag: string;
   caption: string;
-  category: ClinicTourCategory;
+  category: Exclude<ClinicTourCategory, 'all'>;
 }
+
+export const clinicTourFilters: { id: ClinicTourCategory; label: string }[] = [
+  { id: 'all', label: 'All Photos' },
+  { id: 'operatory', label: 'Operatories' },
+  { id: 'technology', label: 'Digital Tech & Diagnostics' },
+  { id: 'care', label: 'Doctor Care & Treatment' },
+  { id: 'facility', label: 'Clinic Facility' },
+];
 
 export const clinicTourItems: ClinicTourItem[] = [
   {
-    filename: 'treatment-operatory-green-chair-setup.jpg',
-    path: '02_clinic_and_facilities/interior_and_equipment/treatment-operatory-green-chair-setup.jpg',
-    caption: 'Two fully-equipped treatment rooms, each set up for a calm, unhurried visit.',
+    filename: 'treatment-operatory-green-chair-setup.webp',
+    path: '02_clinic_and_facilities/interior_and_equipment/treatment-operatory-green-chair-setup.webp',
+    title: 'Primary Operatory Suite',
+    tag: 'Treatment Room',
+    caption: 'Modern treatment room configured for relaxed, unhurried patient visits with ergonomic seating.',
     category: 'operatory',
   },
   {
-    filename: 'treatment-operatory-blue-chair-side.jpg',
-    path: '02_clinic_and_facilities/interior_and_equipment/treatment-operatory-blue-chair-side.jpg',
-    caption: 'A second operatory with modern dental chair and equipment.',
-    category: 'operatory',
-  },
-  {
-    filename: 'operatory-chair-with-digital-opg-xray-display.jpg',
-    path: '02_clinic_and_facilities/interior_and_equipment/operatory-chair-with-digital-opg-xray-display.jpg',
-    caption: 'Full digital imaging on-site — no waiting on outside lab results.',
+    filename: 'operatory-chair-with-digital-opg-xray-display.webp',
+    path: '02_clinic_and_facilities/interior_and_equipment/operatory-chair-with-digital-opg-xray-display.webp',
+    title: 'Chairside Digital OPG Display',
+    tag: 'Digital Imaging',
+    caption: 'Instant on-screen digital X-ray diagnostics right at the dental chair for transparent treatment review.',
     category: 'technology',
   },
   {
-    filename: 'digital-panoramic-opg-xray-monitor.jpg',
-    path: '02_clinic_and_facilities/interior_and_equipment/digital-panoramic-opg-xray-monitor.jpg',
-    caption: 'Digital panoramic X-ray diagnostics available chairside.',
+    filename: 'dr-jyothi-sajjan-performing-dental-procedure-highres.webp',
+    path: '03_doctor_and_team/dr-jyothi-sajjan-performing-dental-procedure-highres.webp',
+    title: 'Specialist In-Chair Procedure',
+    tag: 'MDS-Led Care',
+    caption: 'Dr. Jyothi Sajjan personally conducts every orthodontic adjustment and precision procedure.',
+    category: 'care',
+  },
+  {
+    filename: 'treatment-operatory-blue-chair-side.webp',
+    path: '02_clinic_and_facilities/interior_and_equipment/treatment-operatory-blue-chair-side.webp',
+    title: 'Secondary Operatory Suite',
+    tag: 'Treatment Room',
+    caption: 'Secondary fully equipped operatory to minimize wait times and ensure prompt patient attention.',
+    category: 'operatory',
+  },
+  {
+    filename: 'digital-panoramic-opg-xray-monitor.webp',
+    path: '02_clinic_and_facilities/interior_and_equipment/digital-panoramic-opg-xray-monitor.webp',
+    title: 'Digital Panoramic X-Ray System',
+    tag: 'Precision Diagnostics',
+    caption: 'High-definition full-jaw panoramic imaging for accurate orthodontic and implant planning without outside lab trips.',
     category: 'technology',
   },
   {
     filename: 'nsk-endo-mate-dt-rotary-endodontic-motor.jpg',
     path: '02_clinic_and_facilities/interior_and_equipment/nsk-endo-mate-dt-rotary-endodontic-motor.jpg',
-    caption: 'The rotary technology behind our faster, gentler root canal treatments.',
+    title: 'NSK Rotary Endodontic Motor',
+    tag: 'Advanced Tech',
+    caption: 'Japanese precision rotary motor technology ensuring gentle, efficient, and pain-free single-visit root canals.',
     category: 'technology',
   },
   {
-    filename: 'sterilization-room-autoclave-and-storage.jpg',
-    path: '02_clinic_and_facilities/interior_and_equipment/sterilization-room-autoclave-and-storage.jpg',
-    caption:
-      'A dedicated autoclave room — every instrument sterilized between patients, not just wiped down.',
-    category: 'sterilization',
+    filename: 'dr-jyothi-sajjan-treating-patient-portrait.webp',
+    path: '03_doctor_and_team/dr-jyothi-sajjan-treating-patient-portrait.webp',
+    title: 'Chairside Patient Care',
+    tag: 'Clinical Care',
+    caption: 'Attentive, gentle care with thorough patient communication throughout each step of treatment.',
+    category: 'care',
   },
   {
-    filename: 'clinic-entrance-reception-glass-door.jpg',
-    path: '02_clinic_and_facilities/exterior/clinic-entrance-reception-glass-door.jpg',
-    caption: 'Find us on Amba Bhavani Temple Road, near Sambhram Institute of Technology.',
-    category: 'entrance',
-  },
-  {
-    filename: 'clinic-outdoor-hanging-signboard.jpg',
-    path: '02_clinic_and_facilities/exterior/clinic-outdoor-hanging-signboard.jpg',
-    caption: 'Easy to spot from the street in Vidyaranyapura.',
-    category: 'entrance',
-  },
-  {
-    filename: 'clinic-interior-operatory-and-sterilization-room.jpg',
-    path: '02_clinic_and_facilities/interior_and_equipment/clinic-interior-operatory-and-sterilization-room.jpg',
-    caption: 'Wide view of the clinic treatment and sterilization bay.',
+    filename: 'clinic-interior-operatory-and-sterilization-room.webp',
+    path: '02_clinic_and_facilities/interior_and_equipment/clinic-interior-operatory-and-sterilization-room.webp',
+    title: 'Clinical Facility Overview',
+    tag: 'Hygiene Layout',
+    caption: 'Spacious layout with strict separation between clean sterilization zones and patient operatories.',
     category: 'facility',
   },
   {
-    filename: 'operatory-and-doctor-consultation-desk.jpg',
-    path: '02_clinic_and_facilities/interior_and_equipment/operatory-and-doctor-consultation-desk.jpg',
-    caption: 'Consultation desk beside the treatment area for clear, unhurried visits.',
+    filename: 'operatory-and-doctor-consultation-desk.webp',
+    path: '02_clinic_and_facilities/interior_and_equipment/operatory-and-doctor-consultation-desk.webp',
+    title: 'Doctor Consultation Desk',
+    tag: 'Consultation',
+    caption: 'Private chairside consultation desk for detailed discussions of treatment options and transparent pricing.',
     category: 'facility',
   },
   {
-    filename: 'dental-chair-unit-side-view.jpg',
-    path: '02_clinic_and_facilities/interior_and_equipment/dental-chair-unit-side-view.jpg',
-    caption: 'Ergonomic dental unit for comfortable treatment.',
-    category: 'facility',
+    filename: 'dental-chair-unit-side-view.webp',
+    path: '02_clinic_and_facilities/interior_and_equipment/dental-chair-unit-side-view.webp',
+    title: 'Ergonomic Dental Chair Unit',
+    tag: 'Patient Comfort',
+    caption: 'Cushioned ergonomic patient seating designed to provide maximum back and neck comfort during procedures.',
+    category: 'operatory',
   },
   {
-    filename: 'dental-chair-led-examination-light-detail.jpg',
-    path: '02_clinic_and_facilities/interior_and_equipment/dental-chair-led-examination-light-detail.jpg',
-    caption: 'LED surgical lighting for precise clinical care.',
-    category: 'facility',
+    filename: 'dental-chair-led-examination-light-detail.webp',
+    path: '02_clinic_and_facilities/interior_and_equipment/dental-chair-led-examination-light-detail.webp',
+    title: 'Surgical LED Examination Light',
+    tag: 'Operatory Tech',
+    caption: 'Multi-intensity shadowless LED illumination for high-precision clinical examination and cosmetic procedures.',
+    category: 'technology',
+  },
+  {
+    filename: 'dental-examination-instruments-procedure-closeup.webp',
+    path: '03_doctor_and_team/dental-examination-instruments-procedure-closeup.webp',
+    title: 'Sterilized Clinical Instruments',
+    tag: 'Safety & Hygiene',
+    caption: '100% autoclave-sterilized dental instruments pre-packaged and opened in front of each patient.',
+    category: 'care',
   },
 ];
 

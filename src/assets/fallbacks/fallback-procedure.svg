@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <linearGradient id="procBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#151513"/>
+      <stop offset="100%" stop-color="#0b7484"/>
+    </linearGradient>
+    <linearGradient id="procAccent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#fb7185" stop-opacity="0.25"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#procBg)"/>
+  <circle cx="400" cy="250" r="130" fill="url(#procAccent)"/>
+  <g transform="translate(400, 240) scale(1.6)" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.9">
+    <!-- Tooth / Procedure Icon -->
+    <path d="M-18 -26 C-30 -26 -34 -10 -34 4 C-34 18 -24 38 -14 46 C-4 54 -6 18 0 18 C6 18 4 54 14 46 C24 38 34 18 34 4 C34 -10 30 -26 18 -26 C8 -26 4 -16 0 -16 C-4 -16 -8 -26 -18 -26 Z"/>
+    <path d="M-10 2 C-4 8 4 8 10 2" stroke="#38bdf8" stroke-width="2"/>
+    <circle cx="16" cy="-14" r="2.5" fill="#f59e0b" stroke="none"/>
+  </g>
+  <text x="400" y="430" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="600" fill="#ffffff" opacity="0.85" text-anchor="middle" letter-spacing="1">CLINICAL DENTAL PROCEDURE</text>
+  <text x="400" y="460" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="500" fill="#38bdf8" opacity="0.9" text-anchor="middle">Apex Dental &amp; Orthodontics</text>
+</svg>

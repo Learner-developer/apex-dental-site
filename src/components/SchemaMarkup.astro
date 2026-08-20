@@ -1,0 +1,182 @@
+---
+import {
+  siteUrl,
+  clinicName,
+  legalName,
+  alternateNames,
+  seo,
+  phoneTel,
+  businessDetails,
+  geo,
+  hours,
+  googleReviewsUrl,
+} from '../data/site';
+import { services } from '../data/services';
+import { faqItems } from '../data/content';
+import { doctorsData } from '../data/doctors';
+
+// 1. LocalBusiness / Dentist / MedicalBusiness Main Knowledge Graph
+const clinicSchema = {
+  '@context': 'https://schema.org',
+  '@type': ['Dentist', 'MedicalBusiness', 'LocalBusiness'],
+  '@id': `${siteUrl}/#dentist`,
+  name: clinicName,
+  alternateName: alternateNames,
+  legalName: legalName,
+  description: seo.description,
+  url: siteUrl,
+  logo: `${siteUrl}/Visuals/01_branding_and_credentials/apex-dental-clinic-3d-wall-logo.png`,
+  image: [
+    `${siteUrl}/Visuals/01_branding_and_credentials/apex-dental-clinic-3d-wall-logo.png`,
+    `${siteUrl}/Visuals/02_clinic_and_facilities/interior_and_equipment/clinic-interior-operatory-and-sterilization-room.webp`,
+    `${siteUrl}/Visuals/03_doctor_and_team/dr-jyothi-sajjan-patient-consultation-desk.webp`,
+  ],
+  telephone: phoneTel,
+  priceRange: businessDetails.priceRange,
+  currenciesAccepted: businessDetails.currenciesAccepted,
+  paymentAccepted: businessDetails.paymentAccepted.join(', '),
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: geo.streetAddress,
+    addressLocality: geo.addressLocality,
+    addressRegion: geo.addressRegion,
+    postalCode: geo.postalCode,
+    addressCountry: geo.addressCountry,
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: geo.latitude,
+    longitude: geo.longitude,
+  },
+  hasMap: googleReviewsUrl,
+  areaServed: businessDetails.areasServed.map((area) => ({
+    '@type': 'AdministrativeArea',
+    name: area,
+  })),
+  openingHoursSpecification: hours.structured.map((slot) => ({
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: slot.days,
+    opens: slot.opens,
+    closes: slot.closes,
+  })),
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: businessDetails.ratingValue,
+    reviewCount: businessDetails.reviewCount,
+    bestRating: businessDetails.bestRating,
+    worstRating: businessDetails.worstRating,
+  },
+  founder: {
+    '@type': 'Person',
+    '@id': `${siteUrl}/#dr-jyothi-sajjan`,
+    name: doctorsData[0]?.name || 'Dr. Jyothi Sajjan',
+    jobTitle: doctorsData[0]?.role || 'Founder & Lead Orthodontist',
+    honorificPrefix: 'Dr.',
+    alumniOf: 'Rajiv Gandhi University of Health Sciences (RGUHS)',
+    sameAs: doctorsData[0]?.linkedinUrl,
+  },
+  employee: doctorsData.map((doc) => ({
+    '@type': 'Physician',
+    '@id': `${siteUrl}/#${doc.name.toLowerCase().replace(/[^a-z0-9]/g, '-')}`,
+    name: doc.name,
+    jobTitle: doc.role,
+    medicalSpecialty: 'https://schema.org/Dentistry',
+    description: doc.bio,
+    sameAs: doc.linkedinUrl,
+  })),
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Dental Services & Clinical Treatments',
+    itemListElement: services.map((dept) => ({
+      '@type': 'OfferCatalog',
+      name: dept.title,
+      itemListElement: dept.items.map((item) => ({
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'MedicalProcedure',
+          name: item.name,
+          description: item.description,
+        },
+      })),
+    })),
+  },
+};
+
+// 2. FAQPage Schema for Search Rich Snippets & AI Overviews
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.answer,
+    },
+  })),
+};
+
+// 3. MedicalWebPage & WebSite Schema
+const webPageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'MedicalWebPage',
+  '@id': `${siteUrl}/#webpage`,
+  url: siteUrl,
+  name: seo.title,
+  description: seo.description,
+  isPartOf: {
+    '@type': 'WebSite',
+    '@id': `${siteUrl}/#website`,
+    url: siteUrl,
+    name: clinicName,
+    inLanguage: 'en-IN',
+  },
+  about: {
+    '@id': `${siteUrl}/#dentist`,
+  },
+};
+
+// 4. BreadcrumbList Schema
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: siteUrl,
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Services',
+      item: `${siteUrl}/#services`,
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: 'Specialist Doctors',
+      item: `${siteUrl}/#doctors`,
+    },
+    {
+      '@type': 'ListItem',
+      position: 4,
+      name: 'Patient Reviews',
+      item: `${siteUrl}/#reviews`,
+    },
+    {
+      '@type': 'ListItem',
+      position: 5,
+      name: 'Location & Map',
+      item: `${siteUrl}/#location`,
+    },
+  ],
+};
+---
+
+<!-- JSON-LD Structured Data Graphs -->
+<script type="application/ld+json" set:html={JSON.stringify(clinicSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(webPageSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />

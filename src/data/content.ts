@@ -64,9 +64,31 @@ export const whyChooseItems = [
   },
 ];
 
-export const trustStats = [
-  { value: '4.97★', label: 'Google Rating (482 reviews)' },
-  { value: '7-11 months', label: 'Average braces alignment time' },
-  { value: '2 doctors', label: 'MDS Orthodontist + Endodontist on staff' },
-  { value: '100%', label: 'Instruments sterilized between every patient' },
+export interface TrustStat {
+  value: string;
+  label: string;
+  sublabel: string;
+}
+
+export const trustStats: TrustStat[] = [
+  {
+    value: '4.97★',
+    label: 'Google Rating',
+    sublabel: '482 verified patient reviews',
+  },
+  {
+    value: '7–11 mo',
+    label: 'Braces Timeline',
+    sublabel: 'Average mild-to-moderate case',
+  },
+  {
+    value: '2 Doctors',
+    label: 'MDS-Led Care',
+    sublabel: 'Orthodontist & Endodontist on staff',
+  },
+  {
+    value: '100%',
+    label: 'Autoclave Sterilized',
+    sublabel: 'Instruments sanitized between patients',
+  },
 ];

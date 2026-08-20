@@ -1,6 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600;1,700&display=swap");
-@import url("https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&display=swap");
 @import "tailwindcss";
+
 
 @theme {
   --color-ink: #151513;
@@ -18,16 +17,15 @@
   --color-sage-light: #26c6da;
   --color-muted: #5c5c57;
 
-  /* Fresh Accent Palette */
-  --color-accent-cyan: #24d3e9;
-  --color-accent-mint: #1de1da;
-  --color-accent-seafoam: #53ecc2;
-  --color-accent-spring: #8af4a4;
-  --color-accent-lime: #c1f886;
-  --color-accent-lemon: #f9f871;
+  /* Unified 4-Color Accent Palette */
+  --color-accent-rose: #fb7185;
+  --color-accent-purple: #c084fc;
+  --color-accent-sky: #38bdf8;
+  --color-accent-amber: #f59e0b;
 
   --font-sans: "General Sans", "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-display: "Plus Jakarta Sans", "General Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-serif: "Newsreader", "Playfair Display", Georgia, Cambria, "Times New Roman", Times, serif;
   --radius-card: 1.5rem;
   --shadow-soft: 0 10px 30px rgb(21 21 19 / 0.06);
   --shadow-lift: 0 20px 44px rgb(21 21 19 / 0.1);
@@ -37,10 +35,25 @@
   html {
     scroll-behavior: smooth;
     scroll-padding-top: 6.5rem;
+    -webkit-text-size-adjust: 100%;
+    tab-size: 4;
   }
 
   body {
-    @apply bg-cream font-sans text-[1.125rem] leading-[1.6] text-ink antialiased;
+    @apply bg-cream font-sans text-base leading-[1.625] text-ink antialiased;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    text-wrap: balance;
+    letter-spacing: -0.025em;
+  }
+
+  p {
+    text-wrap: pretty;
   }
 
   ::selection {
@@ -58,24 +71,42 @@
   }
 
   .eyebrow {
-    @apply mb-3 text-xs font-semibold uppercase tracking-[0.14em] text-brand-deep;
+    @apply mb-3 text-xs font-bold uppercase tracking-[0.14em];
   }
 
   .pill-label {
-    @apply mb-4 inline-flex rounded-full border border-ink/10 bg-white px-3 py-1 text-xs font-semibold uppercase tracking-[0.12em] text-ink transition duration-200 hover:border-brand-deep/30 hover:bg-[#1de1da]/10;
+    @apply mb-4 inline-flex items-center rounded-full border border-ink/10 bg-white px-3.5 py-1 text-xs font-semibold uppercase tracking-[0.08em] text-ink transition duration-200 hover:border-brand-deep/30 hover:bg-[#38bdf8]/15;
+  }
+
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.35rem, 1.5rem + 3.8vw, 4.25rem);
+    line-height: 1.08;
+    letter-spacing: -0.035em;
+    text-wrap: balance;
+    @apply font-bold text-white;
   }
 
   .section-title {
     font-family: var(--font-display);
-    font-size: clamp(2rem, 1.2rem + 2.4vw, 3.5rem);
-    line-height: 1.12;
+    font-size: clamp(2rem, 1.25rem + 2.2vw, 3.25rem);
+    line-height: 1.14;
     letter-spacing: -0.03em;
     text-wrap: balance;
     @apply font-bold text-ink;
   }
 
   .section-lead {
-    @apply mt-4 max-w-2xl text-base leading-relaxed text-ink/70 sm:text-lg;
+    @apply mt-4 max-w-2xl text-base leading-[1.65] text-ink/80 sm:text-lg sm:leading-[1.65];
+    text-wrap: pretty;
+  }
+
+  .card-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    @apply font-bold text-ink;
   }
 
   .card-surface {
@@ -86,28 +117,30 @@
     @apply transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[var(--shadow-lift)];
   }
 
-  .btn-cta {
-    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-ink px-6 py-3 text-sm font-semibold tracking-wide text-white shadow-sm transition duration-200 ease-out hover:-translate-y-0.5 hover:bg-ink-soft hover:shadow-md active:translate-y-0 active:scale-[0.98] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand;
+  .btn-cta,
+  .btn-brand,
+  .btn-cta-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-[#25D366] bg-[#25D366] px-5 py-2.5 text-xs sm:text-sm font-semibold tracking-wide text-white shadow-xs transition-all duration-200 ease-out hover:bg-transparent hover:text-[#25D366] active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#25D366];
   }
 
-  .btn-brand {
-    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-brand px-6 py-3 text-sm font-semibold tracking-wide text-ink shadow-sm transition duration-200 ease-out hover:-translate-y-0.5 hover:brightness-105 hover:shadow-md active:translate-y-0 active:scale-[0.98] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-deep;
+  .btn-call {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-[#38bdf8] bg-[#38bdf8] px-5 py-2.5 text-xs sm:text-sm font-semibold tracking-wide text-white shadow-xs transition-all duration-200 ease-out hover:bg-transparent hover:text-[#38bdf8] active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#38bdf8];
   }
 
   .btn-ghost {
-    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-white/70 bg-white/10 px-6 py-3 text-sm font-semibold tracking-wide text-white backdrop-blur-sm transition duration-200 ease-out hover:-translate-y-0.5 hover:bg-white/20 active:translate-y-0 active:scale-[0.98] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white;
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-white/70 bg-white/10 px-5 py-2.5 text-xs sm:text-sm font-semibold tracking-wide text-white backdrop-blur-sm transition-all duration-200 ease-out hover:bg-transparent hover:border-white active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white;
   }
 
   .btn-outline {
-    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-ink/20 bg-white px-6 py-3 text-sm font-semibold tracking-wide text-ink transition duration-200 ease-out hover:-translate-y-0.5 hover:border-brand-deep hover:bg-brand/15 active:translate-y-0 active:scale-[0.98] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand;
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-ink/20 bg-white px-5 py-2.5 text-xs sm:text-sm font-semibold tracking-wide text-ink transition-all duration-200 ease-out hover:border-brand-deep hover:bg-brand/15 active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand;
   }
 
   .btn-ink {
-    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-ink px-6 py-3 text-sm font-semibold tracking-wide text-white transition duration-200 ease-out hover:-translate-y-0.5 hover:bg-ink-soft active:translate-y-0 active:scale-[0.98] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand;
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-ink bg-ink px-5 py-2.5 text-xs sm:text-sm font-semibold tracking-wide text-white transition-all duration-200 ease-out hover:bg-transparent hover:text-ink active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand;
   }
 
   .slider-btn {
-    @apply inline-flex h-11 w-11 items-center justify-center rounded-full border border-ink/15 bg-white text-ink shadow-sm transition duration-200 ease-out hover:-translate-y-0.5 hover:scale-105 hover:border-brand hover:bg-[#1de1da]/10 hover:text-ink hover:shadow-md active:translate-y-0 active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand;
+    @apply inline-flex h-11 w-11 items-center justify-center rounded-full border border-ink/15 bg-white text-ink shadow-sm transition duration-200 ease-out hover:-translate-y-0.5 hover:scale-105 hover:border-[#38bdf8] hover:bg-[#38bdf8]/15 hover:text-ink hover:shadow-md active:translate-y-0 active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand;
   }
 
   .skip-link {
@@ -118,16 +151,24 @@
     font-family: var(--font-display);
   }
 
+  .font-serif {
+    font-family: var(--font-serif);
+  }
+
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+
   .accent-text {
     color: var(--color-brand-deep);
   }
 
   .nav-pill {
-    @apply hidden items-center rounded-full border border-ink/10 bg-white/80 p-1 shadow-sm backdrop-blur lg:flex;
+    @apply hidden items-center rounded-full border border-ink/10 bg-white p-1 shadow-sm lg:flex;
   }
 
   .nav-pill-link {
-    @apply rounded-full px-4 py-2 text-sm font-medium text-ink/80 transition duration-200 hover:bg-[#1de1da]/20 hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand;
+    @apply rounded-full px-4 py-2 text-sm font-medium tracking-[0.01em] text-ink/80 transition duration-200 hover:bg-[#38bdf8]/15 hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand;
   }
 
   .blob-shape {
@@ -144,17 +185,100 @@
 
   #site-chrome {
     transition:
-      background-color 0.3s ease,
-      box-shadow 0.3s ease,
-      border-color 0.3s ease;
+      background-color 0.25s ease,
+      box-shadow 0.25s ease,
+      border-color 0.25s ease;
+  }
+
+  #announcement-bar {
+    max-height: 96px;
+    transition:
+      max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+      padding 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 0.2s ease;
+  }
+
+  #site-chrome.hide-announcement #announcement-bar,
+  #site-chrome.is-solid #announcement-bar {
+    max-height: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    margin: 0 !important;
+    opacity: 0 !important;
+    border-bottom-width: 0 !important;
+    border-bottom-color: transparent !important;
+    pointer-events: none;
+    visibility: hidden;
   }
 
   #site-chrome.is-solid {
-    background: rgb(244 245 240 / 0.94);
-    backdrop-filter: blur(14px);
+    background: rgb(244 245 240 / 0.78);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    backdrop-filter: blur(16px) saturate(180%);
     border-bottom: 1px solid rgb(21 21 19 / 0.08);
-    box-shadow: 0 4px 24px rgb(21 21 19 / 0.06);
+    box-shadow: 0 4px 20px rgb(21 21 19 / 0.04);
   }
+
+  /* Sticky Header (UX Best-Practice Proportions: ~58px Height) */
+  #site-chrome.is-solid .header-inner {
+    padding-top: 0.5rem !important; /* 8px */
+    padding-bottom: 0.5rem !important; /* 8px */
+  }
+
+  #site-chrome.is-solid .header-logo {
+    height: 2.25rem !important; /* 36px mobile */
+  }
+
+  @media (min-width: 640px) {
+    #site-chrome.is-solid .header-logo {
+      height: 2.5rem !important; /* 40px sm */
+    }
+  }
+
+  @media (min-width: 768px) {
+    #site-chrome.is-solid .header-logo {
+      height: 2.65rem !important; /* 42.5px md/lg */
+    }
+  }
+
+  #site-chrome.is-solid .nav-pill {
+    padding: 0.25rem !important;
+    box-shadow: 0 1px 4px rgb(21 21 19 / 0.04);
+    border-color: rgb(21 21 19 / 0.1);
+  }
+
+  #site-chrome.is-solid .nav-pill-item {
+    padding: 0.35rem 0.95rem !important;
+    font-size: 0.8125rem !important; /* 13px */
+    line-height: 1.15rem !important;
+  }
+
+  #site-chrome.is-solid .header-btn {
+    min-height: 2.375rem !important; /* 38px WCAG touch compliant */
+    padding-left: 1.1rem !important;
+    padding-right: 1.1rem !important;
+    padding-top: 0.4rem !important;
+    padding-bottom: 0.4rem !important;
+    font-size: 0.8125rem !important; /* 13px */
+    gap: 0.45rem !important;
+  }
+
+  #site-chrome.is-solid .header-btn .btn-icon {
+    height: 0.875rem !important; /* 14px */
+    width: 0.875rem !important;
+  }
+
+  #site-chrome.is-solid .header-menu-btn {
+    height: 2.375rem !important; /* 38px */
+    width: 2.375rem !important;
+    min-height: 0 !important;
+  }
+
+  #site-chrome.is-solid .header-menu-btn svg {
+    height: 1.25rem !important; /* 20px */
+    width: 1.25rem !important;
+  }
+
 }
 
 @media (prefers-reduced-motion: no-preference) {

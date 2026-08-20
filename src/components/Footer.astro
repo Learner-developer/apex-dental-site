@@ -1,14 +1,34 @@
 ---
 import { Image } from 'astro:assets';
-import logo from '@visuals/01_branding_and_credentials/apex-dental-clinic-3d-wall-logo.png';
 import { clinicName, navLinks, phoneDisplay, tagline, telUrl, whatsappUrl } from '../data/site';
+import { getVisualImage } from '../utils/images';
+
+const logo = getVisualImage('apex-dental-clinic-3d-wall-logo.png', 'logo');
 ---
 
-<footer class="bg-ink py-16 text-white/75">
-  <div class="section-shell">
-    <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-      <div>
-        <a href="#" class="inline-block" aria-label="Apex Dental home">
+<footer class="relative overflow-hidden bg-white border-t border-ink/10 py-14 sm:py-20 text-ink/80">
+  <!-- Soft Ambient Glow Orbs in Background -->
+  <div
+    class="blob-shape blob-float pointer-events-none absolute -left-20 -bottom-20 h-64 w-64 bg-[#38bdf8]/10 blur-3xl"
+    aria-hidden="true"
+  ></div>
+  <div
+    class="blob-shape-alt blob-float-slow pointer-events-none absolute -right-20 top-10 h-72 w-72 bg-[#c084fc]/10 blur-3xl"
+    aria-hidden="true"
+  ></div>
+
+  <div class="section-shell relative z-10">
+    <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-12">
+      <!-- Column 1: Brand & Bio -->
+      <div class="space-y-4">
+        <a
+          href="#"
+          data-analytics-event="nav_click"
+          data-analytics-location="footer"
+          data-analytics-label="Footer Brand Logo"
+          class="inline-block transition-transform duration-300 hover:scale-[1.02]"
+          aria-label="Apex Dental home"
+        >
           <Image
             src={logo}
             alt="Apex Dental and Orthodontic Clinic logo"
@@ -17,27 +37,58 @@ import { clinicName, navLinks, phoneDisplay, tagline, telUrl, whatsappUrl } from
             sizes="(max-width: 768px) 200px, 280px"
           />
         </a>
-        <p class="mt-4 text-sm leading-relaxed text-white/75">{tagline}</p>
-        <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="btn-brand mt-6">
-          Book on WhatsApp
-        </a>
+        <p class="text-sm sm:text-base leading-[1.65] text-ink/80">{tagline}</p>
+        <div class="pt-2">
+          <a
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-analytics-event="click_whatsapp"
+            data-analytics-location="footer"
+            data-analytics-label="Book WhatsApp Footer"
+            class="btn-cta w-full sm:w-auto text-center justify-center"
+          >
+            <svg class="h-4 w-4 shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+            </svg>
+            <span>Book on WhatsApp</span>
+          </a>
+        </div>
       </div>
 
+      <!-- Column 2: Clinic Hours -->
       <div>
-        <p class="text-sm font-semibold uppercase tracking-[0.08em] text-[#1de1da]">Hours</p>
-        <p class="mt-4 text-sm">Monday–Saturday</p>
-        <p class="mt-1 text-sm">9:30 AM–2:00 PM</p>
-        <p class="mt-1 text-sm">4:30–8:30 PM</p>
-        <p class="mt-2 text-sm text-white/50">Closed Sunday</p>
+        <p class="text-sm sm:text-base font-bold uppercase tracking-[0.12em] text-brand-deep">Clinic Hours</p>
+        <div class="mt-4 space-y-2">
+          <p class="text-sm sm:text-base font-bold text-ink">Monday–Saturday</p>
+          <div class="rounded-xl bg-cream/70 border border-ink/5 p-3 space-y-1.5">
+            <p class="text-sm sm:text-base font-semibold tabular-nums text-ink flex items-center justify-between">
+              <span class="text-xs sm:text-sm font-bold uppercase tracking-wider text-ink/60">Morning</span>
+              <span>9:30 AM–2:00 PM</span>
+            </p>
+            <p class="text-sm sm:text-base font-semibold tabular-nums text-ink flex items-center justify-between">
+              <span class="text-xs sm:text-sm font-bold uppercase tracking-wider text-ink/60">Evening</span>
+              <span>4:30–8:30 PM</span>
+            </p>
+          </div>
+          <p class="text-xs sm:text-sm font-semibold text-rose-600/90 pt-0.5">Closed on Sundays</p>
+        </div>
       </div>
 
+      <!-- Column 3: Quick Navigation -->
       <div>
-        <p class="text-sm font-semibold uppercase tracking-[0.08em] text-[#1de1da]">Quick links</p>
-        <ul class="mt-4 space-y-2.5 text-sm">
+        <p class="text-sm sm:text-base font-bold uppercase tracking-[0.12em] text-brand-deep">Quick Links</p>
+        <ul class="mt-4 space-y-1.5 text-sm sm:text-base">
           {
             navLinks.map((link) => (
               <li>
-                <a href={link.href} class="inline-block transition-all duration-200 hover:text-[#1de1da] hover:translate-x-1">
+                <a
+                  href={link.href}
+                  data-analytics-event="nav_click"
+                  data-analytics-location="footer"
+                  data-analytics-label={link.label}
+                  class="inline-block py-1 font-medium text-ink/80 transition-all duration-200 hover:text-brand-deep hover:translate-x-1.5"
+                >
                   {link.label}
                 </a>
               </li>
@@ -46,26 +97,45 @@ import { clinicName, navLinks, phoneDisplay, tagline, telUrl, whatsappUrl } from
         </ul>
       </div>
 
+      <!-- Column 4: Contact Info -->
       <div>
-        <p class="text-sm font-semibold uppercase tracking-[0.08em] text-[#1de1da]">Contact</p>
-        <p class="mt-4 text-sm">
-          <a href={telUrl} class="font-medium text-white transition-colors duration-200 hover:text-[#1de1da]">
-            {phoneDisplay}
-          </a>
-        </p>
-        <p class="mt-2 text-sm">Vidyaranyapura, Bengaluru</p>
+        <p class="text-sm sm:text-base font-bold uppercase tracking-[0.12em] text-brand-deep">Direct Contact</p>
+        <address class="not-italic mt-4 space-y-3">
+          <div>
+            <p class="text-xs uppercase tracking-wider font-bold text-ink/50">Call Reception</p>
+            <a
+              href={telUrl}
+              data-analytics-event="click_phone"
+              data-analytics-location="footer"
+              data-analytics-label="Footer Phone"
+              class="mt-1 inline-flex items-center gap-1.5 text-base sm:text-lg font-bold tabular-nums text-ink transition-colors duration-200 hover:text-brand-deep"
+            >
+              <span>📞</span> {phoneDisplay}
+            </a>
+          </div>
+          <div>
+            <p class="text-xs uppercase tracking-wider font-bold text-ink/50">Clinic Address</p>
+            <p class="mt-1 text-sm sm:text-base text-ink/80 leading-[1.6]">
+              Vidyaranyapura, BHEL Layout, near Sambhram College, Bengaluru 560097
+            </p>
+          </div>
+        </address>
       </div>
     </div>
 
+    <!-- Big Watermark Wordmark -->
     <p
-      class="mt-16 select-none font-display text-[clamp(3.5rem,14vw,11rem)] font-bold leading-[0.8] tracking-[-0.06em] text-white/10"
+      class="mt-12 sm:mt-16 select-none font-display text-[clamp(2.75rem,13vw,11rem)] font-extrabold leading-[0.8] tracking-tight text-ink/[0.04]"
       aria-hidden="true"
     >
       APEX DENTAL
     </p>
 
-    <p class="mt-8 border-t border-white/10 pt-6 text-center text-xs text-white/40">
-      © {new Date().getFullYear()} {clinicName}. All rights reserved.
-    </p>
+    <!-- Bottom Copyright -->
+    <div class="mt-8 border-t border-ink/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs sm:text-sm text-ink/65 text-center sm:text-left">
+      <p>© {new Date().getFullYear()} {clinicName}. All rights reserved.</p>
+      <p class="text-xs sm:text-sm text-ink/55">Quality Dental & Orthodontic Care in Bengaluru</p>
+    </div>
   </div>
 </footer>
+

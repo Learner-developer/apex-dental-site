@@ -1,0 +1,79 @@
+---
+import { gaMeasurementId } from '../data/site';
+---
+
+{
+  gaMeasurementId && (
+    <>
+      <script
+        is:inline
+        async
+        src={`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`}
+      />
+      <script
+        is:inline
+        define:vars={{ gaMeasurementId }}
+      >
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        window.gtag = gtag;
+        gtag('js', new Date());
+        gtag('config', gaMeasurementId, {
+          send_page_view: true,
+          anonymize_ip: true,
+          cookie_flags: 'SameSite=None;Secure'
+        });
+      </script>
+    </>
+  )
+}
+
+<!-- Declarative Analytics Event Dispatcher (Clicks, CTAs, Phone, WhatsApp, Maps) -->
+<script>
+  declare global {
+    interface Window {
+      gtag?: (...args: any[]) => void;
+      dataLayer?: any[];
+    }
+  }
+
+  function initAnalyticsTracking() {
+    document.addEventListener('click', (e) => {
+      const target = (e.target as HTMLElement)?.closest('[data-analytics-event]');
+      if (!target) return;
+
+      const eventName = target.getAttribute('data-analytics-event');
+      if (!eventName) return;
+
+      const eventLocation = target.getAttribute('data-analytics-location') || 'general';
+      const eventLabel = target.getAttribute('data-analytics-label') || target.textContent?.trim().slice(0, 50) || '';
+      const eventDept = target.getAttribute('data-analytics-dept') || '';
+
+      const payload: Record<string, any> = {
+        event_category: 'conversion',
+        event_location: eventLocation,
+        event_label: eventLabel,
+      };
+
+      if (eventDept) {
+        payload.department = eventDept;
+      }
+
+      // Dispatch to GA4 gtag if active
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', eventName, payload);
+      }
+
+      // Dispatch to window dataLayer if available
+      if (Array.isArray(window.dataLayer)) {
+        window.dataLayer.push({
+          event: eventName,
+          ...payload,
+        });
+      }
+    });
+  }
+
+  initAnalyticsTracking();
+  document.addEventListener('astro:page-load', initAnalyticsTracking);
+</script>

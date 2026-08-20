@@ -1,0 +1,132 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import { quickServices } from '../data/services';
+
+import whiteningBg from '@visuals/services/Teeth Whitening.webp';
+import implantBg from '@visuals/services/Dental Implant.webp';
+import alignerBg from '@visuals/services/Teeth Alignment.webp';
+import rctBg from '@visuals/services/Root Canal (RCT).webp';
+import cleaningBg from '@visuals/services/Teeth Cleaning & Gum Care.webp';
+import surgeryBg from '@visuals/services/Oral Surgery.webp';
+
+import whiteningIcon from '@visuals/quick_services/icon-whitening.png';
+import implantIcon from '@visuals/quick_services/icon-implant.png';
+import alignerIcon from '@visuals/quick_services/icon-aligner.png';
+import rctIcon from '@visuals/quick_services/icon-rct.png';
+import cleaningIcon from '@visuals/quick_services/icon-cleaning.png';
+import surgeryIcon from '@visuals/quick_services/icon-surgery.png';
+
+const bgImages: Record<string, ImageMetadata> = {
+  'teeth-whitening': whiteningBg,
+  'dental-implant': implantBg,
+  'teeth-alignment': alignerBg,
+  'root-canal': rctBg,
+  'teeth-cleaning': cleaningBg,
+  'oral-surgery': surgeryBg,
+};
+
+const iconImages: Record<string, ImageMetadata> = {
+  'teeth-whitening': whiteningIcon,
+  'dental-implant': implantIcon,
+  'teeth-alignment': alignerIcon,
+  'root-canal': rctIcon,
+  'teeth-cleaning': cleaningIcon,
+  'oral-surgery': surgeryIcon,
+};
+---
+
+<section id="quick-services" class="relative bg-cream py-8 sm:py-12">
+  <div class="section-shell">
+    <!-- Header -->
+    <div class="reveal-on-scroll text-center max-w-2xl mx-auto mb-5 sm:mb-7">
+      <h2 class="font-display text-xl sm:text-2xl lg:text-[1.85rem] font-bold text-ink leading-tight tracking-tight text-balance">
+        Trusted Dental Services for<br class="hidden sm:inline" /> the Whole <span class="font-serif italic font-normal text-brand-deep">Family</span>
+      </h2>
+    </div>
+
+    <!-- 6 Compact Cards Grid with Direct Tab Linking -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-4.5">
+      {
+        quickServices.map((service, index) => {
+          const deptKey = service.targetAnchor.replace('#dept-', '');
+          return (
+            <a
+              href={service.targetAnchor}
+              @click={`
+                window.dispatchEvent(new CustomEvent('select-dept', { detail: '${deptKey}' }));
+                const target = document.getElementById('services');
+                if (target) {
+                  target.scrollIntoView({ behavior: 'smooth' });
+                }
+              `}
+              data-analytics-event="click_quick_service"
+              data-analytics-location="quick_services"
+              data-analytics-label={service.title}
+              class:list={[
+                'group card-surface card-hover flex flex-col justify-between overflow-hidden rounded-xl sm:rounded-[1rem] bg-white border border-ink/[0.07] shadow-2xs hover:shadow-md transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand cursor-pointer',
+                index < 3 && 'reveal-on-scroll',
+                index >= 3 && 'reveal-on-scroll reveal-delay-1',
+              ]}
+              aria-label={`View detailed ${service.title} department`}
+            >
+              <!-- 1. Full-Width Edge-to-Edge Image (Compact Sleek Ratio) -->
+              <div class="overflow-hidden aspect-[16/8] bg-ink/5 w-full">
+                <Image
+                  src={bgImages[service.id]}
+                  alt={`${service.title} treatment`}
+                  class="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                  widths={[320, 480, 600]}
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  loading="lazy"
+                />
+              </div>
+
+              <!-- 2. Compact Text Body with Direct Tab Navigation -->
+              <div class="flex flex-1 flex-col justify-between bg-white p-3.5 sm:p-4">
+                <div>
+                  <!-- Heading + Icon Row -->
+                  <div class="flex items-center justify-between gap-2">
+                    <h3 class="font-display text-sm sm:text-[1.025rem] font-bold text-ink transition-colors duration-200 group-hover:text-brand-deep leading-snug">
+                      {service.title}
+                    </h3>
+                    <div class="inline-flex h-7 w-7 items-center justify-center shrink-0">
+                      <Image
+                        src={iconImages[service.id]}
+                        alt=""
+                        class="h-6 w-6 object-contain transition-transform duration-300 group-hover:scale-110"
+                        widths={[48, 96]}
+                        sizes="24px"
+                        loading="lazy"
+                      />
+                    </div>
+                  </div>
+
+                  <!-- Description -->
+                  <p class="mt-1 text-xs text-ink/70 leading-relaxed line-clamp-2">
+                    {service.description}
+                  </p>
+                </div>
+
+                <!-- Bottom Row with Compact Action Button -->
+                <div class="mt-3 pt-2 border-t border-ink/5 flex items-center justify-between">
+                  <span class="text-[0.65rem] font-semibold uppercase tracking-wider text-ink/50 transition-colors duration-200 group-hover:text-brand-deep">
+                    View Details
+                  </span>
+                  <div
+                    class="inline-flex h-5.5 w-5.5 items-center justify-center rounded-full bg-cream text-ink border border-ink/10 transition-all duration-300 group-hover:bg-ink group-hover:text-white group-hover:border-ink group-hover:translate-x-0.5 shadow-2xs"
+                    aria-hidden="true"
+                  >
+                    <svg class="h-2.5 w-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M7 17L17 7M17 7H9M17 7V15" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </a>
+          );
+        })
+      }
+    </div>
+  </div>
+</section>

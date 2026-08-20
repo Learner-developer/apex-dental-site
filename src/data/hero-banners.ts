@@ -1,9 +1,5 @@
 import type { ImageMetadata } from 'astro';
-import bannerTrust from '@visuals/banner/banner-trust-general.webp';
-import bannerOrthodontics from '@visuals/banner/banner-orthodontics-braces.webp';
-import bannerRootCanal from '@visuals/banner/banner-root-canal-comfort.webp';
-import bannerImplants from '@visuals/banner/banner-implants-restorative.webp';
-import bannerFamily from '@visuals/banner/banner-family-pediatric.webp';
+import { getVisualImage } from '../utils/images';
 import { telUrl, whatsappNumber } from './site';
 
 export interface HeroBannerCta {
@@ -30,7 +26,7 @@ const wa = (message: string) =>
 export const heroBanners: HeroBanner[] = [
   {
     id: 'trust',
-    image: bannerTrust,
+    image: getVisualImage('banner-trust-general.webp', 'clinic'),
     imageAlt: 'Apex Dental clinic team providing trusted dental care in Bengaluru',
     eyebrow: 'Vidyaranyapura, Bengaluru',
     headline: 'Where Quality Meets Affordability',
@@ -49,7 +45,7 @@ export const heroBanners: HeroBanner[] = [
   },
   {
     id: 'orthodontics',
-    image: bannerOrthodontics,
+    image: getVisualImage('banner-orthodontics-braces.webp', 'clinic'),
     imageAlt: 'Orthodontic braces treatment at Apex Dental clinic',
     eyebrow: 'Orthodontics & Braces',
     headline: 'Straighter Teeth in 7–11 Months',
@@ -61,11 +57,12 @@ export const heroBanners: HeroBanner[] = [
         external: true,
         variant: 'primary',
       },
+      { label: 'Call Now', href: telUrl, variant: 'ghost' },
     ],
   },
   {
     id: 'root-canal',
-    image: bannerRootCanal,
+    image: getVisualImage('banner-root-canal-comfort.webp', 'clinic'),
     imageAlt: 'Calm modern treatment room at Apex Dental clinic',
     eyebrow: 'Painless Root Canal',
     headline: 'Root Canals, Without the Dread',
@@ -78,11 +75,12 @@ export const heroBanners: HeroBanner[] = [
         external: true,
         variant: 'primary',
       },
+      { label: 'Call Now', href: telUrl, variant: 'ghost' },
     ],
   },
   {
     id: 'implants',
-    image: bannerImplants,
+    image: getVisualImage('banner-implants-restorative.webp', 'clinic'),
     imageAlt: 'Dental implants and restorative dentistry at Apex Dental',
     eyebrow: 'Implants & Restorative',
     headline: 'Missing Teeth, Fully Restored',
@@ -94,11 +92,12 @@ export const heroBanners: HeroBanner[] = [
         external: true,
         variant: 'primary',
       },
+      { label: 'Call Now', href: telUrl, variant: 'ghost' },
     ],
   },
   {
     id: 'family',
-    image: bannerFamily,
+    image: getVisualImage('banner-family-pediatric.webp', 'clinic'),
     imageAlt: 'Friendly family dental checkup at Apex Dental clinic',
     eyebrow: 'Family & Pediatric',
     headline: "A Dental Visit Your Kids Won't Dread",
@@ -110,6 +109,7 @@ export const heroBanners: HeroBanner[] = [
         external: true,
         variant: 'primary',
       },
+      { label: 'Call Now', href: telUrl, variant: 'ghost' },
     ],
   },
 ];

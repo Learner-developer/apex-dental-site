@@ -1,0 +1,26 @@
+# Apex Dental & Orthodontic Clinic
+
+> Where Quality Meets Affordability. 4.97★ Google Rating (482+ verified patient reviews). Led by an MDS Orthodontist in Vidyaranyapura, Bengaluru.
+
+## Quick Facts
+- **Clinic Name**: Apex Dental & Orthodontic Clinic
+- **Founding Lead Doctor**: Dr. Jyothi Sajjan (BDS, MDS in Orthodontics & Dentofacial Orthopedics, RGUHS)
+- **Specialist Endodontist**: Dr. Monika Mohanty (BDS, Endodontics & Conservative Dentistry)
+- **Phone / WhatsApp**: +91 98869 63633
+- **Address**: #2, Amba Bhavani Temple Rd, near Sambhram Institute of Technology College, Vidyaranyapura Post, BHEL Layout, Chickbetahalli, Bengaluru, Karnataka 560097
+- **Primary Geo Catchment**: Vidyaranyapura, MS Palya, Chickbetahalli, BHEL Layout, Jalahalli East, Sambhram College Campus, Yelahanka, Bengaluru North
+- **Clinic Timings**: Monday to Saturday: 9:30 AM – 2:00 PM (Morning Slot) and 4:30 PM – 8:30 PM (Evening Slot). Sunday: Closed.
+- **Rating**: 4.97 / 5.0 Stars (482 Verified Reviews on Google Maps)
+
+## Clinical Specialties
+- **Orthodontics & Braces**: Metal braces, ceramic (clear) braces, clear aligners, lingual braces, retainers. Average completion time: 7–11 months. Free initial consultation.
+- **Root Canal (RCT)**: Painless rotary endodontics using NSK Endo-Mate DT micro-motors, digital apex locators, chairside digital X-rays, single or two-sitting RCT, Re-RCT.
+- **Prosthodontics & Implants**: Zirconia metal-free CAD/CAM crowns, bridges, titanium dental implants, complete & partial flexible dentures.
+- **Cosmetic Dentistry**: Teeth whitening, composite bonding, gap closure (diastema fix), fractured tooth restoration, porcelain veneers.
+- **Oral Surgery**: Atraumatic wisdom tooth removal, surgical extractions, pre-orthodontic space extractions.
+- **Periodontics & Gum Care**: Ultrasonic scaling, tartar removal, stain polishing, bleeding gum treatments.
+- **Pediatric & Family Dentistry**: Child dental exams, fluoride treatments, pit & fissure sealants, milk tooth fillings, space maintainers.
+
+## For More Information
+- Detailed Entity Knowledge Base: https://apexdentalclinic.in/llms-full.txt
+- Website & Online Booking: https://apexdentalclinic.in/

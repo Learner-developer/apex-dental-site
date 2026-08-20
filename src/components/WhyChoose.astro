@@ -11,24 +11,24 @@ const icons = [
 ];
 
 const badgeColors = [
-  'bg-[#24d3e9]',
-  'bg-[#1de1da]',
-  'bg-[#53ecc2]',
-  'bg-[#8af4a4]',
-  'bg-[#c1f886]',
-  'bg-[#f9f871]',
+  'bg-[#fb7185]',
+  'bg-[#c084fc]',
+  'bg-[#38bdf8]',
+  'bg-[#f59e0b]',
+  'bg-[#fb7185]',
+  'bg-[#c084fc]',
 ];
 ---
 
-<section class="relative bg-cream py-20 md:py-28">
+<section class="relative overflow-hidden bg-cream py-16 sm:py-24 md:py-28">
   <div class="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
-    <div class="blob-shape blob-float absolute right-10 top-10 hidden h-64 w-64 bg-[#1de1da]/15 blur-2xl lg:block"></div>
-    <div class="blob-shape-alt blob-float-slow absolute left-12 bottom-10 hidden h-56 w-56 bg-[#53ecc2]/15 blur-2xl lg:block"></div>
+    <div class="blob-shape blob-float absolute right-10 top-10 hidden h-64 w-64 bg-[#38bdf8]/15 blur-2xl lg:block"></div>
+    <div class="blob-shape-alt blob-float-slow absolute left-12 bottom-10 hidden h-56 w-56 bg-[#c084fc]/15 blur-2xl lg:block"></div>
   </div>
 
   <div class="section-shell relative">
     <div class="reveal-on-scroll mx-auto max-w-2xl text-center lg:mx-0 lg:text-left">
-      <p class="eyebrow">Why patients stay</p>
+      <p class="eyebrow text-[#fb7185]">Why patients stay</p>
       <h2 class="section-title">Why Choose Apex Dental</h2>
       <p class="section-lead mx-auto lg:mx-0">
         What patients mention most — specialist-led care, faster braces timelines, and follow-up
@@ -36,12 +36,12 @@ const badgeColors = [
       </p>
     </div>
 
-    <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:pb-10">
+    <div class="mt-10 sm:mt-12 grid gap-5 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:pb-10">
       {
         whyChooseItems.map((item, index) => (
           <article
             class:list={[
-              'group reveal-on-scroll card-surface card-hover p-8 border border-ink/5 flex flex-col justify-between',
+              'group reveal-on-scroll card-surface card-hover p-6 sm:p-8 border border-ink/5 flex flex-col justify-between',
               index % 2 === 1 && 'lg:translate-y-8',
               index === 2 && 'lg:-translate-y-4',
               index === 0 && 'reveal-delay-1',
@@ -55,10 +55,10 @@ const badgeColors = [
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d={icons[index]} />
                   </svg>
                 </div>
-                <span class="font-display text-2xl font-semibold text-ink/20 transition-colors duration-300 group-hover:text-brand-deep/50">0{index + 1}</span>
+                <span class="font-display tabular-nums text-2xl font-bold text-ink/25 transition-colors duration-300 group-hover:text-brand-deep/60">0{index + 1}</span>
               </div>
-              <h3 class="mt-6 font-semibold text-ink transition-colors duration-200 group-hover:text-brand-deep">{item.title}</h3>
-              <p class="mt-3 text-base leading-relaxed text-ink/70">{item.description}</p>
+              <h3 class="card-title text-xl font-bold text-ink transition-colors duration-200 group-hover:text-brand-deep mt-6">{item.title}</h3>
+              <p class="mt-3 text-sm sm:text-base text-ink/80 leading-[1.62] text-pretty">{item.description}</p>
             </div>
           </article>
         ))

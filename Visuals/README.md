@@ -79,7 +79,7 @@ c:\Users\nisha\Downloads\Apex Dental Assets\Visuals\
 
 ### 2. Clinic Tour / Gallery Section
 - **Entrance**: [`clinic-entrance-reception-glass-door.jpg`](file:///c:/Users/nisha/Downloads/Apex%20Dental%20Assets/Visuals/02_clinic_and_facilities/exterior/clinic-entrance-reception-glass-door.jpg)
-- **Modern Operatory**: [`operatory-chair-with-digital-opg-xray-display.jpg`](file:///c:/Users/nisha/Downloads/Apex%20Dental%20Assets/Visuals/02_clinic_and_facilities/interior_and_equipment/operatory-chair-with-digital-opg-xray-display.jpg)
+- **Modern Operatory**: [`operatory-chair-with-digital-opg-xray-display.webp`](file:///c:/Users/nisha/Downloads/Apex%20Dental%20Assets/Visuals/02_clinic_and_facilities/interior_and_equipment/operatory-chair-with-digital-opg-xray-display.webp)
 - **Sterilization Bay**: [`sterilization-room-autoclave-and-storage.jpg`](file:///c:/Users/nisha/Downloads/Apex%20Dental%20Assets/Visuals/02_clinic_and_facilities/interior_and_equipment/sterilization-room-autoclave-and-storage.jpg)
 - **Endodontics Equipment**: [`nsk-endo-mate-dt-rotary-endodontic-motor.jpg`](file:///c:/Users/nisha/Downloads/Apex%20Dental%20Assets/Visuals/02_clinic_and_facilities/interior_and_equipment/nsk-endo-mate-dt-rotary-endodontic-motor.jpg)
 
