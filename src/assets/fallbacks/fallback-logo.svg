@@ -1,17 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 80" width="300" height="80">
-  <defs>
-    <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#26c6da"/>
-      <stop offset="100%" stop-color="#0b7484"/>
-    </linearGradient>
-  </defs>
-  <g transform="translate(10, 10)">
-    <!-- Stylized Tooth Icon -->
-    <path d="M15 10 C8 10 4 20 4 28 C4 38 12 50 18 56 C24 62 23 40 28 40 C33 40 32 62 38 56 C44 50 52 38 52 28 C52 20 48 10 41 10 C34 10 31 18 28 18 C25 18 22 10 15 10 Z" fill="url(#logoGrad)"/>
-    <circle cx="36" cy="18" r="3" fill="#ffffff"/>
-  </g>
-  <!-- Text -->
-  <text x="75" y="38" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="24" font-weight="800" fill="#ffffff" letter-spacing="1">APEX</text>
-  <text x="145" y="38" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="24" font-weight="400" fill="#26c6da" letter-spacing="1">DENTAL</text>
-  <text x="76" y="54" font-family="'General Sans', system-ui, sans-serif" font-size="10" font-weight="600" fill="#ffffff" opacity="0.75" letter-spacing="2">CLINIC &amp; ORTHODONTICS</text>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="80" viewBox="0 0 300 80"><defs><linearGradient id="logoGrad" x1="0%" x2="100%" y1="0%" y2="100%"><stop offset="0%" stop-color="#26c6da"/><stop offset="100%" stop-color="#0b7484"/></linearGradient></defs><g transform="translate(10, 10)"><path fill="url(#logoGrad)" d="M15 10 C8 10 4 20 4 28 C4 38 12 50 18 56 C24 62 23 40 28 40 C33 40 32 62 38 56 C44 50 52 38 52 28 C52 20 48 10 41 10 C34 10 31 18 28 18 C25 18 22 10 15 10 Z"/><circle cx="36" cy="18" r="3" fill="#fff"/></g><text x="75" y="38" fill="#fff" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="24" font-weight="800" letter-spacing="1">APEX</text><text x="145" y="38" fill="#26c6da" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="24" font-weight="400" letter-spacing="1">DENTAL</text><text x="76" y="54" fill="#fff" font-family="'General Sans', system-ui, sans-serif" font-size="10" font-weight="600" letter-spacing="2" opacity=".75">CLINIC &amp; ORTHODONTICS</text></svg>
